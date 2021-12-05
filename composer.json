@@ -1,0 +1,17 @@
+{
+    "name": "pc/ofms",
+    "description": "this is a funeral management system",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Pc\\Ofms\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Fms",
+            "email": "wbfuneralmanagementsystem@gmail.com"
+        }
+    ],
+    "require": {}
+}

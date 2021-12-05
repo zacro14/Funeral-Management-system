@@ -1,0 +1,42 @@
+.btn-custom , .footer-bg{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #e8c99b;
+    background-image: linear-gradient(315deg, #e8c99b 0%, #e8bc85 74%);
+}
+
+img, .img-logo{
+    width: 100%;
+    height: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.txt-custom{
+    font-size: 21px;
+    background: #695B46;
+    background: -webkit-linear-gradient(to right, #695B46 0%, #E8BC85 100%);
+    background: -moz-linear-gradient(to right, #695B46 0%, #E8BC85 100%);
+    background: linear-gradient(to right, #695B46 0%, #E8BC85 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.divider-custom{
+    background-color: #e8c99b;
+    background-image: linear-gradient(315deg, #e8c99b 0%, #e8bc85 74%);
+}
+
+.quote1, .quote2{
+    font-size: 50px;
+    background: #695B46;
+    background: -webkit-linear-gradient(to right, #695B46 0%, #E8BC85 100%);
+    background: -moz-linear-gradient(to right, #695B46 0%, #E8BC85 100%);
+    background: linear-gradient(to right, #695B46 0%, #E8BC85 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.custom-horn{
+    font-size: 50px;
+}
+
+

@@ -1,0 +1,27 @@
+//DB-CONTENT
+
+	1. ADMIN
+		ADMIN - admin-id, admin-firstname, admin-middlename, admin-lastname, admin-username, admin-password, admin-photo
+
+	2. CLIENT
+		CLIENT - client-id, client-firstname, client-middlename, client-lastname, client-username, client-password, client-photo, client-application-date
+
+	3. STAFF/WORKER
+		STAFF/WORKER - staff-id, staff-firstname, staff-middlename, staff-lastname, staff-photo, work-type-id
+
+	4. WORKER-TYPE
+		WORKER-TYPE - work-type-id, work-type
+
+	5. WAGE
+		WAGE - wage-id, wage-amount, work-type-id
+
+	6. SCHEDULE
+		SCHEDULE - schedule-id, schedule-time
+
+	7. BRANCHES
+		BRANCHES - branch_id, branch_name, branch_address
+
+	8. RESERVATION
+		RESERVATION - reservation_id, branch_id, client_id
+	
+	

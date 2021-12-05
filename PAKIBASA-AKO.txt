@@ -1,0 +1,6 @@
+to access admin
+	--- localhost/ofms/admin
+	
+	admin username = admin
+	admin password = admin
+	admin branch = Sipocot

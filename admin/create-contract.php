@@ -108,8 +108,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Name:</label>
-                            <select name="client" id="" class="form-control" required>
+                            <label for="">Client Name:</label>
+                            <select name="client" id="" class="form-control" onchange="fetchDeceased(this.value)" required>
                                 <option value="" disabled selected>-Select Client-</option>
                                 <?php
                                     $select_client = "SELECT * FROM client";
@@ -117,7 +117,9 @@
                                     while($row_client = $query->fetch_assoc())
                                     {
                                         echo "<option value='".$row_client['client_id']."'>".$row_client['client_firstname']. ' ' . $row_client['client_middlename']. ' ' .$row_client['client_lastname']. ' ' ."</option>";
+
                                     }
+                                   
                                 ?>
                             </select>
                         </div>
@@ -134,17 +136,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Name:</label>
-                            <select name="deceased" id="" class="form-control" onchange="fetchInfo(this.value);" required>
+                            <label for="">Deceased Name:</label>
+                            <select name="deceased" id="deceased" class="form-control" onchange="fetchInfo(this.value);" required>
                                 <option value="" disabled selected>-Select Deceased-</option>
-                                <?php
-                                    $select_deceased = "SELECT * FROM deceased WHERE status=0";
-                                    $query = $conn->query($select_deceased);
-                                    while($row_deceased = $query->fetch_assoc())
-                                    {
-                                        echo "<option value='".$row_deceased['deceased_id']."'>".$row_deceased['deceased_fname']. ' ' . $row_deceased['deceased_mname']. ' ' .$row_deceased['deceased_lname']. ' ' ."</option>";
-                                    }
-                                ?>
                             </select>
                         </div>
                     </div>
@@ -183,7 +177,7 @@
                         <div class="form-group ">
                             <label for="">Casket Type</label>
                             <div class="wait"></div>
-                            <select name="casket" class="form-control   " id="casket" onchange="fetchAmount(this.value);">
+                            <select name="casket" class="form-control" id="casket" onchange="fetchAmount(this.value);">
                                 <option value="" selected>--Select Casket Type--</option>
                             </select> 
                         </div>
@@ -229,9 +223,10 @@ function fetchInfo(val)
             $(".info").html("<center><img class='' src='img/loader.gif' /></center>");
         },
         success: function (response) {
-            document.getElementById("info").innerHTML=response; 
+            document.getElementById("info").innerHTML=response;
         }
     });
+    
 }
 function fetchAmount(val)
 {
@@ -256,7 +251,7 @@ function fetchService(val)
         type: 'post',
         url: 'fetch-service-info.php',
         data: {
-        id:val
+        id: val
         },
         beforeSend:function(){
             $(".casket").html("Loading");
@@ -267,6 +262,20 @@ function fetchService(val)
     });
 }
 
+
+function fetchDeceased(val){
+    $.ajax({
+        type: 'post',
+        url: 'fetch-deceasedName.php',
+        data: {
+            id: val
+        },
+        success: function(response) {
+            document.getElementById("deceased").innerHTML = response;
+        }
+        
+    })
+}
 
 </script>
 

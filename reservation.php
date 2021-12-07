@@ -11,38 +11,7 @@
 ?>
     <body id="page-top">
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-            <div class="container px-5">
-                <a class="navbar-brand fw-bold txt-custom" href="#page-top"><small class="txt-custom fw-bold"> Funeraria Santa Rita de Casia</small></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    
-                    <i class="fa fa-bars"></i>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="homepage.php">Home</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3 active" href="reservation.php">My Reservations</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3 " href="">Kasurog</a></li>
-                        
-                        <hr> 
-                        
-                    </ul>
-                    <div class="dropdown">
-                        <button class="btn btn-custom text-white fw-bold btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user"></i>
-                        <span><?php echo $user['client_firstname'] . ' ' . $user['client_lastname'];?></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="change-password.php?id=<?php echo $user['client_id'];?>&name=<?php echo $user['client_firstname'];?> " class="dropdown-item dropdown-footer"><i class="fas fa-edit"></i> Change Password </a></li>
-                            <li><a href="logout.php" class="dropdown-item dropdown-footer"><i class="fas fa-power-off"></i> Log out </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        
+        <?php include_once 'views/navigation-authenticated.html' ?>        
         <section class="testimonials mt-3">
             <div class="container">
                 <h4>Reservation History</h4>

@@ -115,6 +115,7 @@
                                     <thead>
                                         <th>#</th>
                                         <th>Service</th>
+                                        <th>Package Includes</th>
                                         <th></th>
                                     </thead>
                                     <tbody>
@@ -126,6 +127,7 @@
                                                 <tr>
                                                     <td><?php echo $no;?></td>
                                                     <td><?php echo $row_service['service'];?></td>
+                                                    <td><?php echo $row_service['package_include']; ?> </td>
                                                     <td>
 														<div class="btn-group btn-group-sm">
                                                             

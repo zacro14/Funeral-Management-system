@@ -78,7 +78,7 @@
                     <a href="#"><i class="fa fa-file-pdf-o fa-fw"></i> Reports<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="reservation-report.php">Reservation</a>
+                            <a href="reservations.php">Reservation</a>
                         </li>
                     </ul>
                 </li>
@@ -112,7 +112,7 @@
                                         $query = $conn->query($fetch);
                                         echo "<div class='huge'>".$query->num_rows."</div>";
                                     ?>
-                                    <div>Reservations</div>
+                                    <div>RESERVATIONS</div>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                                         $query = $conn->query($fetch);
                                         echo "<div class='huge'>".$query->num_rows."</div>";
                                     ?>
-                                    <div>Registered Clients</div>
+                                    <div> CLIENTS</div>
                                 </div>
                             </div>
                         </div>
@@ -190,7 +190,7 @@
                                         $query = $conn->query($fetch);
                                         echo "<div class='huge'>".$query->num_rows."</div>";
                                     ?>
-                                    <div>NOT FULLY PAID</div>
+                                    <div>FULLY PAID</div>
                                 </div>
                             </div>
                         </div>
@@ -216,7 +216,7 @@
                                         $query = $conn->query($fetch);
                                         echo "<div class='huge'>".$query->num_rows."</div>";
                                     ?>
-                                    <div>Deceased</div>
+                                    <div>DECEASED</div>
                                 </div>
                             </div>
                         </div>
@@ -238,11 +238,11 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <?php
-                                        //$fetch = "SELECT * FROM em WHERE branch_id = '".$user['branch_id']."'";
-                                        //$query = $conn->query($fetch);
-                                       // echo "<div class='huge'>".$query->num_rows."</div>";
+                                        $fetch = "SELECT * FROM employee WHERE branch_id = '".$user['branch_id']."'";
+                                        $query = $conn->query($fetch);
+                                        echo "<div class='huge'>".$query->num_rows."</div>";
                                     ?>
-                                    <div>Employees</div>
+                                    <div>EMPLOYEES</div>
                                 </div>
                             </div>
                         </div>

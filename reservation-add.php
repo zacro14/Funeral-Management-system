@@ -8,6 +8,7 @@
         $BRANCH = $_POST['branch'];
         $DATE = $_POST['date'];
         $CLIENT = $_POST['client'];
+        $STATUS = "PENDING";
         $numbers='';
         for($i = 0; $i < 10; $i++){
             $numbers .= $i;
@@ -23,7 +24,7 @@
         }
         else
         {
-            $INSERT_QUERY = "INSERT INTO reservation (reservation_code, reservation_date, reservation_status, branch_id, client_id) VALUES ('$RESERVATION_CODE', '$DATE', 'PENDING', '$BRANCH', '$CLIENT')";
+            $INSERT_QUERY = "INSERT INTO reservation (reservation_code, reservation_date, reservation_status, branch_id, client_id) VALUES ('$RESERVATION_CODE', '$DATE', '$STATUS', '$BRANCH', '$CLIENT')";
             if($conn->query($INSERT_QUERY) === true)
             {   
                 $_SESSION['success-reservation'] = 'YOUR RESERVATION HAS BEEN SUCCESSFULLY PROCESSED!';

@@ -10,11 +10,15 @@ if(isset($_POST['id']))
         INNER JOIN service using(service_id)
         WHERE service.service_id ='".$id."' ";
         $query = $conn->query($select);
-        while($row = $query->fetch_assoc())
-        {   
-         echo "<option value='".$row['casket_id']."'>".$row['casket_type']."-  &#8369;".$row['amount'].""."</option>";
+        $has_result = mysqli_num_rows($query);
+
+        if ($has_result > 0){
+            while($row = $query->fetch_assoc()){   
+                    echo "<option value='".$row['casket_id']."'>".$row['casket_type']."-  &#8369;".$row['amount'].""."</option>";
+            }
+        } else{
+            echo "<option selected>-- Select Package --</option>";
         }
-    
     }
     exit;
 

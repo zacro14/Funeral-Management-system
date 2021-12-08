@@ -30,6 +30,7 @@
                         unset($_SESSION['error-update']);
                     }
                 ?>
+
                 <div class="row">
                     <div class="col-md-12 col-xs-12">
                         <div class="card">
@@ -80,13 +81,13 @@
                                                     <small class="font-italic text-green text-muted">Branch</small>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input type="date" name="date" class="form-control" required>
+                                                    <input id="date" type="date" name="date" class="form-control" onchange="checkDate(this.value);" required>
                                                     <small class="font-italic text-green text-muted">Date</small>
                                                 </div>
 
                                             <div class="col-6">
-                                                <select name="branch" id="" class="form-select" onchange='fetchCasketType(this.value)' required>   
-                                                    <option selected>-- Select Package --</option>
+                                                <select name="package" id="" class="form-select" required  onchange='fetchCasketType(this.value)'>   
+                                                    <option value="" selected>-- Select Package --</option>
                                                     <?php
                         
                                                     $sql_package = "SELECT * FROM service";
@@ -101,10 +102,10 @@
                                             </div> 
                                             
                                             <div class="col-6">
-                                                <select name="branch" id="casket-type" class="form-select" required>   
-                                                    <option selected>-- Select Casket Type --</option>
+                                                <select name="casket" id="casket-type" class="form-select" required>   
+                                                    <option value="" selected>-- Select Casket Type --</option>
                                                 </select>
-                                                <small class="font-italic text-green text-muted">Casket</small>
+                                                <small class="font-italic text-green text-muted">Casket</small> 
                                             </div> 
                                         </div>
                                             </div>
@@ -120,7 +121,7 @@
             </div>
         </section>
        
-        <?php include ('includes/footer.php') ?> 
+        <!-- <?php include ('includes/footer.php') ?>  -->
         <?php include ('includes/scripts.php') ?>
         <script>
 function fetchCasketType(val)
@@ -137,6 +138,15 @@ function fetchCasketType(val)
     });
      }
 
+     function checkDate(val){
+         const currentDate = new Date().toISOString().slice(0, 10);
+         const date = val;
+
+          if(currentDate  >= date){
+              const response = "PLEASE CHECK YOUR RESERVATION DATE!"
+              alert(response);
+           
+        } }
         </script>
     </body>
 </html>

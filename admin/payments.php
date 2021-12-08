@@ -119,18 +119,19 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $fetch_payment = "SELECT payments.payment_id, payments.payment_amount, payments.balance, payments.status, payments.contract_unique_id, client.client_firstname, client.client_lastname, branches.branch_name, branches.branch_address
-                                                FROM ((payments
+                                            $fetch_payment = "SELECT payments.payment_id, payments.payment_amount, payments.balance, payments.status, contract.contract_unique_id, client.client_firstname, client.client_middlename, client.client_lastname, branches.branch_name, branches.branch_address FROM (((payments
                                                 INNER JOIN client ON payments.client_id = client.client_id)
+                                                INNER JOIN contract ON payments.contract_id = contract.contract_id)
                                                 INNER JOIN branches ON branches.branch_id = branches.branch_id) WHERE branches.branch_id = '".$user['branch_id']."'";
                                             $query_payments = $conn->query($fetch_payment);
                                             $no = 1;
-                                            while($row_payments = $query_payments->fetch_assoc()){ $status = ($row_payments['status'] == 'FULLY PAID') ?'<span class="label label-success pull-left">FULLY PAID</span>':'<span class="label label-warning pull-left">NOT FULLY PAID</span>';?>      
+                                            while($row_payments = $query_payments->fetch_assoc())
+                                             { $status = ($row_payments['status'] == 'FULLY PAID') ? '<span class="label label-success pull-left">FULLY PAID</span>':'<span class="label label-warning pull-left">NOT FULLY PAID</span>';?>      
                                                 <tr>
                                                     <td><?php echo $no;?></td>
                                                     <td><?php echo $row_payments['client_firstname']. ' ' . $row_payments['client_middlename']. ' ' . $row_payments['client_lastname'];?></td>
                                                     
-                                                    <td><?php echo $row_payments['amount']; ?></td>
+                                                    <td><?php echo $row_payments['payment_amount']; ?></td>
                                                     <td><?php echo $row_payments['balance'];?> </td>
                                                     <td><?php echo $status;?> </td>
                                                     <td><?php echo $row_payments['contract_unique_id'];?> <button class="view btn btn-secondary btn-sm" data-id="<?php echo $row_payments['contract_unique_id']; ?>"><i class="fa fa-eye"></i> View Contract Details</button></td>
@@ -183,7 +184,7 @@
 
 </div>
 
-<?php include 'includes/modals.php' ?>
+<?php include 'includes/modal-contract.php' ?>
 <?php include 'includes/scripts.php' ?>
 
 <script>

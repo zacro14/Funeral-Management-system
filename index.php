@@ -1,4 +1,5 @@
 <?php include 'includes/header.php'?>
+<?php include 'includes/db-connection.php' ?>
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
@@ -111,6 +112,30 @@
                 </div>
             </div>
         </section>
+        
+       <section class="features-icons bg-light"  id="services" >
+           <div class="container">
+           <h3 class="fw-bold text-center">Our Services</h3>
+           <div class="row">
+           <?php $fetch_res = "SELECT * from service";
+                    $query_res = $conn->query($fetch_res); 
+                     while($services = $query_res->fetch_assoc())
+                    {
+                    ?>
+                     <div class="col-md-3">
+                        <div class="card">
+                            <img class="card-img-top" src="design/assets/img/logo.jpeg" alt="Image">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $services['service']; ?></h5>
+                                <p class="card-text"><b>Package Inclusion: </b> <?php echo $services['package_include']; ?></p>
+                                <a  data-bs-toggle="modal" class="btn btn-custom">View More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php }?>
+                </div>
+           </div>
+       </section>
 
 
         <section class="page-section" id="contact">
@@ -167,5 +192,17 @@
         <?php include 'includes/footer.php' ?>
        
         <?php include 'includes/scripts.php' ?>
+        <script>
+
+$(function(){
+   
+   $('.view').click(function(e)
+   {
+       e.preventDefault();
+       $('#view').modal('show');
+       var id = $(this).data('id');
+   });
+});
+        </script>
     </body>
 </html>

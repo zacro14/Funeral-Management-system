@@ -151,7 +151,7 @@
             </div>
         </div>
     </div>
-    <?php include 'includes/modals.php' ?>
+    <?php include 'includes/modal-contract.php' ?>
 </div>
 
 <?php include 'includes/scripts.php' ?>

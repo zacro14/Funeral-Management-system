@@ -147,10 +147,10 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $fetch_res = "SELECT * FROM reservation LEFT JOIN client ON client.client_id = reservation.client_id LEFT JOIN branches ON branches.branch_id = reservation.branch_id  ORDER BY reservation.reservation_date, reservation.reservation_status = 'PENDING' desc";
+                                            $fetch_res = "SELECT * FROM reservation LEFT JOIN client ON client.client_id = reservation.client_id LEFT JOIN branches ON branches.branch_id = reservation.branch_id  ORDER BY reservation.reservation_date, reservation.reservation_status = 'PENDING' ";
                                             $query_res = $conn->query($fetch_res);
                                             $no = 1;
-                                            while($row_res = $query_res->fetch_assoc()){ $status = ($row_res['reservation_status'] == 'APPROVED') ?'<span class="label label-success pull-left">APPROVED</span>':'<span class="label label-warning pull-left">PENDING</span>';?>      
+                                            while($row_res = $query_res->fetch_assoc()){ $status = ($row_res['reservation_status'] == 'APPROVED') ? '<span class="label label-success pull-left">APPROVED</span>':'<span class="label label-warning pull-left">PENDING</span>';?>      
                                                 <tr>
                                                     <td><?php echo $no;?></td>
                                                     <td><?php echo $row_res['reservation_code'];?></td>

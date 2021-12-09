@@ -64,8 +64,10 @@
                                                 unset($_SESSION['success-reservation']);
                                             }
                                             ?>
-                                            <div class="row gy-2">
-                                                <div class="col-6">
+                                    <div class="row"><div class="col-lg-12"><h4 class=" text-dark">Reservation Details</h4></div></div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                <label for="">Branch</label>
                                                     <input type="hidden" name="client" class="form-control" value="<?php echo $_SESSION['client']; ?>"/>  
                                                     <select name="branch" id="" class="form-select" required>
                                                         <option value="" selected>-- Select Branch --</option>
@@ -78,16 +80,19 @@
                                                             }
                                                         ?>
                                                     </select>
-                                                    <small class="font-italic text-green text-muted">Branch</small>
+                                                    
                                                 </div>
-                                                <div class="col-6">
-                                                    <input id="date" type="date" name="date" class="form-control" onchange="checkDate(this.value);" required>
-                                                    <small class="font-italic text-green text-muted">Date</small>
+                                                <div class="col-md-4">
+                                                <label class="text-capitalize" for="">Date of your Reservation</label>
+                                                    <input id="date" type="text" onfocus="(this.type = 'date')" placeholder="Enter Date" name="date" class="form-control" min="<?php echo date("Y-m-d"); ?>" onchange="checkDate(this.value);" required>
+        
                                                 </div>
-
-                                            <div class="col-6">
-                                                <select name="package" id="" class="form-select" required  onchange='fetchCasketType(this.value)'>   
-                                                    <option value="" selected>-- Select Package --</option>
+                                             
+                                            <div class="col-md-4">
+                                             <div class="form-group">
+                                             <label for="">Select Package</label>
+                                                <select name="package" id="" class="form-select" required  onchange='fetchCasketType(this.value);' >   
+                                                    <option value="" selected>--- Select Package ---</option>
                                                     <?php
                         
                                                     $sql_package = "SELECT * FROM service";
@@ -98,19 +103,106 @@
                                                     }
                                                     ?>
                                                 </select>
-                                                    <small class="font-italic text-green text-muted">Package</small>
+                                                    
+                                                </div>
                                             </div> 
                                             
-                                            <div class="col-6">
-                                                <select name="casket" id="casket-type" class="form-select" required>   
-                                                    <option value="" selected>-- Select Casket Type --</option>
-                                                </select>
-                                                <small class="font-italic text-green text-muted">Casket</small> 
+                                            <div class="col-md-4">
+                                                <label for="">Casket Type</label>
+                                                    <select name="casket" id="casket-type" class="form-select"  onchange='getPrice(this.value);' required>   
+                                                        <option value="" selected>--- Select Casket Type ---
+                                                        </option>
+                                                    </select>
+                                                    <small class="text-dark font-italic text-capitalize">please select package*</small> 
                                             </div> 
+
+                                        <div class="col-sm-4">
+                                        <label for="">Casket Price</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">&#8369;</span>
+                                                    <input id="price" readonly 
+                                                    placeholder="0.00" 
+                                                    type="text" 
+                                                    value="" 
+                                                    class="form-control" 
+                                                    aria-label="Amount (Price)"
+                                                    required
+                                                    >
+                                            </div>
+                                        </div>
+
+                                        </div>
+
+                                    <hr>
+                                <div class="row"><div class="col-lg-12"><h4 class=" text-dark">Deceased Details</h4></div></div>
+                                
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Firstname</label>
+                                        <input type="text" class="form-control"
+                                            name="deceased_firstname" value=""  placeholder="Enter here..." required/>
+                                    </div>
+                                </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Middlename</label>
+                                            <input type="text" class="form-control"
+                                            name="deceased_middlename" value=""  placeholder="Enter here..." required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Lastname</label>
+                                            <input type="text" class="form-control"
+                                            name="deceased_lastname" value=""  placeholder="Enter here..." required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Date of Birth</label>
+                                            <input type="date" class="form-control"
+                                            name="date_of_birth" value=""  placeholder="Enter here..." />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Date Died</label>
+                                            <input type="date" class="form-control"
+                                            name="date_died" value=""  placeholder="Enter here..." required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Cause of Death</label>
+                                            <input type="text" class="form-control"
+                                            name="cause_of_death" value=""  placeholder="Enter here..." />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Religion</label>
+                                            <input type="text" class="form-control"
+                                            name="religion" value=""  placeholder="Enter here..." required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label"  for="">Relation to Deceased</label>
+                                            <input type="text" class="form-control"
+                                            name="relation_to_deceased" value=""  placeholder="Enter here..." required/>
+                                           
+                                        </div>
+                                    </div>
                                         </div>
                                             </div>
                                                 <div class="float-right">
-                                                    <button type="submit" name="add-reservation" class="btn btn-custom text-white fw-bold">SUBMIT <i class="fas fa-save"></i> </button>
+                                                    <button type="submit" name="add-reservation" class="btn btn-custom text-white fw-bold text-uppercase">make reservation</button>
                                                 </div>
                                         </div>    
                                     </form>
@@ -124,8 +216,7 @@
         <!-- <?php include ('includes/footer.php') ?>  -->
         <?php include ('includes/scripts.php') ?>
         <script>
-function fetchCasketType(val)
-    {
+function fetchCasketType(val){
         $.ajax({
         type: 'post',
         url: 'fetch-casket.php',
@@ -134,9 +225,24 @@ function fetchCasketType(val)
         },
         success: function (response) {
             document.getElementById("casket-type").innerHTML=response;
+            
+            console.log(response)
         }
-    });
-     }
+
+    })};
+
+function getPrice(val){
+    $.ajax({
+        type: 'post',
+        url: 'fetch-casket-price.php',
+        data: {
+        id: val
+        },
+        success: function (response) {
+            document.getElementById("price").value=response;
+            console.log(response)
+        }
+    })};
 
      function checkDate(val){
          const currentDate = new Date().toISOString().slice(0, 10);

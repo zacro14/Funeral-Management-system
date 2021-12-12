@@ -1,25 +1,35 @@
 <?php include 'includes/header.php' ?>
-<?php include ('includes/db-connection.php'); ?>
+<?php include ('includes/db-connection.php');
+     include('includes/session.php');
+?>
+
 <body>
 <div id="wrapper">
     <?php include 'includes/nav.php' ?>
     <?php 
      $RES_NO = $_GET['resno'];
     
-
+// select reservation
      $fetch_reserv = "SELECT * FROM reservation 
-        INNER JOIN client ON reservation.client_id = client.client_id  
-        WHERE reservation.reservation_code = '".$RES_NO."'";
+     INNER JOIN client ON reservation.client_id = client.client_id
+     INNER JOIN casket ON reservation.casket_id = casket.casket_id
+     INNER JOIN service ON casket.service_id = service.service_id
+     INNER JOIN chapel ON reservation.chapel_id = chapel.chapel_id
+     WHERE reservation.reservation_code =  '".$RES_NO."'";
 
      $query_res = $conn->query($fetch_reserv);
      $result_res = $query_res->fetch_assoc();
- 
+
+     //select chapel
+       
+   
     ?>
 
     <?php
+    // select decesed info
             $sql  = "SELECT * FROM deceased 
-                    INNER JOIN client ON client.client_id = deceased.family_id  
-                    WHERE deceased.family_id = '".$result_res['client_id']."'";
+            INNER JOIN client ON client.client_id = deceased.family_id  
+            WHERE deceased.family_id = '".$result_res['client_id']."'";
 
             $query_deceased = $conn->query($sql);
             $result_deseceased = $query_deceased->fetch_assoc();
@@ -130,15 +140,24 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Client Name:</label>                 
-                                    <input  class="form-control" value="<?php echo $result_res['client_firstname'] ." ".$result_res['client_middlename'] ." ". $result_res['client_lastname']  ;  ?>" placeholder="Client Name" readonly required>     
+                                    <input  class="form-control text-capitalize" value="<?php echo $result_res['client_firstname'] ." ".$result_res['client_middlename'] ." ". $result_res['client_lastname']  ;  ?>" placeholder="Client Name" required>     
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Relation to Deceased:</label>
-                            <input type="text" name="relation" class="form-control" placeholder="Relation to Deceased" required>
+                            <input type="text" name="relation" class="form-control text-capitalize" placeholder="Relation to Deceased" value="<?php echo $result_res['relation_to_deceased'] ?>" required>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Address: </label>                 
+                                    <input  class="form-control text-capitalize" name="client address" value="" placeholder="Address" >     
+                        </div>
+                    </div>
+                    
                 </div>
                 <hr>
                 <div class="row"><div class="col-lg-12"><h3 class=" text-primary">Deceased Details</h3></div></div>
@@ -146,21 +165,21 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Firstname</label>
-                                            <input type="text" class="form-control"
-                                            name="deceased_firstname" value="<?php echo $result_deseceased['deceased_fname']; ?>"  placeholder="Enter here..." required/>
+                                            <input type="text" class="form-control text-capitalize"
+                                            name="deceased_firstname"  value="<?php echo $result_deseceased['deceased_fname']; ?>"  placeholder="Enter here..." required/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Middlename</label>
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="form-control text-capitalize"
                                             name="deceased_middlename" value="<?php echo $result_deseceased['deceased_mname']; ?>"  placeholder="Enter here..." required/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Lastname</label>
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="form-control text-capitalize"
                                             name="deceased_lastname" value="<?php echo $result_deseceased['deceased_lname']; ?>"  placeholder="Enter here..." required/>
                                         </div>
                                     </div>
@@ -183,7 +202,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Cause of Death</label>
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="form-control text-capitalize"
                                             name="cause_of_death" value="<?php echo $result_deseceased['cause_of_death']; ?>"  placeholder="Enter here..." />
                                         </div>
                                     </div>
@@ -192,14 +211,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Religion</label>
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="form-control text-capitalize"
                                             name="religion" value="<?php echo $result_deseceased['religion']; ?>"  placeholder="Enter here..." />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Family</label>
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="form-control text-capitalize"
                                             name="family" value="<?php echo $result_deseceased['client_firstname'] ." ".$result_deseceased['client_middlename'] ." ". $result_deseceased['client_lastname']  ;  ?>"  placeholder="Enter here..." />
                                         </div>
                                     </div>
@@ -212,7 +231,7 @@
                         <div class="form-group">
                             <label for="">Service</label>
                             <select name="service" id="" class="form-control" onchange="fetchService(this.value);">
-                                <option value="" disabled selected>-Select Service-</option>
+                                <option value="<?php echo $result_res['service'] ?>" disabled selected><?php echo $result_res['service'] ?></option>
                                     <?php
                                         $select = "SELECT * FROM service    ";
                                         $query = $conn->query($select);
@@ -224,20 +243,49 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row">
+                    
                         <div class="col-md-6">
                             <label for="">Other Charges(pls. specify)</label>
                             <input type="text" name="charges" class="form-control" placeholder="Enter here..." required>
                         </div>
-                    </div>
+                    
+                </div>
+                <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group ">
-                            <label for="">Casket Type</label>
-                            <div class="wait"></div>
-                            <select name="casket" class="form-control" id="casket" onchange="fetchAmount(this.value);">
-                                <option value="" selected>--Select Casket Type--</option>
-                            </select> 
+                            <div class="form-group ">
+                                <label for="">Casket Type</label>
+                                <div class="wait"></div>
+                                <select name="casket" class="form-control" id="casket" onchange="fetchAmount(this.value);">
+                                    <option value="<?php echo $result_res['casket_type'] ?>" selected><?php echo $result_res['casket_type'] ?></option>
+                                </select> 
+                            </div>
                         </div>
+                        <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Chandeliers and Vigil Equip: </label>                 
+                                            <input  class="form-control text-capitalize" name="chandeliers and vigil equipment" value="" placeholder="Chandeliers and Vigil Equip" >     
+                                </div>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                                <div class="form-group ">
+                                    <label for="">Chapel Viewing: </label>
+                                    <div class="wait"></div>
+                                    <select name="chapel" class="form-control" id="casket" ">
+                                        <option value="<?php echo $result_res['chapel_name'] ?>" selected><?php echo $result_res['chapel_name']; ?></option>
+                                        <?php 
+                                        $fetch_chapel = "SELECT chapel_name FROM chapel";
+                                        $query_chapel = $conn->query($fetch_chapel);
+                                        
+                                        while($result_chapel = $query_chapel->fetch_assoc()){ ;?>
+                                        <option value="nkk"> <?php echo $result_chapel['chapel_name']; ?></option>
+
+                                      <?php  }; ?>
+                                    
+                                       
+                                    </select> 
+                                </div>
                     </div>
                 </div>
                 <hr>
@@ -245,7 +293,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="amount" id="amount">
-                            <b><p style='font-size:45px;' class="text-center text-info">&#8369;0.00</p></b>
+                            <b><p style='font-size:45px;' class="text-center text-info">&#8369;<?php echo number_format($result_res['amount'], 2) ?></p></b>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -258,7 +306,7 @@
                 <br><br><hr>
                 <div class="form-group pull-right">
                     <a href="homepage.php" class="btn btn-danger">Cancel</a>
-                    <button type="submit" class="btn btn-primary" name="btn-create-contract" >Submit</button>
+                    <button type="submit" class="btn btn-primary text-capitalize" name="btn-create-contract" >create contract</button>
                 </div>
             </form>
         </div>

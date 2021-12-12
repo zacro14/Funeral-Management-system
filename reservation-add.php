@@ -11,6 +11,7 @@
         $CASKET = $_POST['casket'];
         $PACKAGE = $_POST['package'];
         $CURRENT_DATE = date('Y-m-d');
+        $CHAPEL =$_POST['chapel'];
         $STATUS = "PENDING";
 
         //deceased info
@@ -24,8 +25,8 @@
         $DECEASED_RELATIONTODEACEASED =  $_POST['relation_to_deceased'];
 
 
-        $bdate = new DateTime($date_of_birth);
-        $died = new DateTime($date_died);
+        $bdate = new DateTime($DECEASED_DATEOFBIRTH);
+        $died = new DateTime($DECEASED_DATEDIED);
 
         $diff = $died->diff($bdate);
         
@@ -49,32 +50,32 @@
         }
 
         $RESERVATION_CODE = 'RES'.$Y.substr(str_shuffle($numbers), 0,5);
+        $STATUS_APPROVE = 'APPROVED';
 
-        $FETCH_RESERVATON = "SELECT * FROM reservation WHERE reservation_date = '$DATE' AND branch_id = $BRANCH ";
+        $FETCH_RESERVATON = "SELECT * FROM reservation WHERE reservation_date = '$DATE' AND branch_id = $BRANCH AND reservation_status = '$STATUS_APPROVE'";
         $RESERVATION_QUERY = $conn->query($FETCH_RESERVATON);
         $rows = mysqli_num_rows($RESERVATION_QUERY);
 
         if($rows > 0){
             $_SESSION['error-reservation'] = 'DATE AND BRANCH IS ALREADY RESERVED! TRY ANOTHER DATE OR BRANCH!';
         }
-        elseif( $CURRENT_DATE  >= $DATE  && $CASKET === '' && $PACKAGE === ''){
-            $_SESSION['error-reservation'] = 'PLEASE CHECK YOUR INPUTS!';
-        } else {
+        else {
            // $INSERT_QUERY = "INSERT INTO reservation (reservation_code, reservation_date, reservation_status, branch_id, client_id) VALUES ('$RESERVATION_CODE', '$DATE', '$STATUS', '$BRANCH', '$CLIENT')";
-            $INSERT_RESERVATION = "INSERT INTO reservation (reservation_code,reservation_date, reservation_status, relationship_to_desceased,branch_id, client_id, casket_id  )  
-            VALUES('$RESERVATION_CODE','$DATE', '$STATUS', '$DECEASED_RELATIONTODEACEASED' ,
-            (SELECT branch_id FROM branches WHERE branch_id = $BRANCH),
+            $INSERT_RESERVATION = "INSERT INTO reservation (reservation_code,reservation_date, reservation_status, relation_to_deceased,branch_id, client_id, casket_id, chapel_id  )  
+            VALUES('$RESERVATION_CODE','$DATE', '$STATUS', '$DECEASED_RELATIONTODEACEASED',
+            (SELECT branch_id FROM branches WHERE branch_id = '$BRANCH'),
             (SELECT client_id FROM client WHERE client_id  = '$CLIENT'),
-            (SELECT casket_id FROM casket WHERE casket_id = '$CASKET' ))" ;
+            (SELECT casket_id FROM casket WHERE casket_id = '$CASKET' ),
+            (SELECT chapel_id FROM chapel WHERE chapel_id = '$CHAPEL' )); ";
 
             // insert into deaceased table
-              $INSERT_RESERVATION = "INSERT INTO deceased 
-                  (deceased_fname, deceased_mname, deceased_lname, date_of_birth, date_died, age, cause_of_death, religion, added_date, family_id, branch_id) 
-                  VALUES ('$DECEASED_FIRSTNAME', '$DECEASED_MIDDLENAME', '$DECEASED_LASTNAME', 
-                  '$DECEASED_DATEOFBIRTH', '$DECEASED_DATEDIED', '$AGE', '$DECEASED_CAUSEOFDEATH', 
-                  '$DECEASED_RELIGION', NOW(), 
-                  (SELECT client_id FROM client WHERE client_id  = '$CLIENT'),
-                  (SELECT branch_id FROM branches WHERE branch_id = $BRANCH))  ";
+               $INSERT_RESERVATION .= "INSERT INTO deceased 
+                   (deceased_fname, deceased_mname, deceased_lname, date_of_birth, date_died, age, cause_of_death, religion, added_date, family_id, branch_id) 
+                   VALUES ('$DECEASED_FIRSTNAME', '$DECEASED_MIDDLENAME', '$DECEASED_LASTNAME', 
+                   '$DECEASED_DATEOFBIRTH', '$DECEASED_DATEDIED', '$AGE', '$DECEASED_CAUSEOFDEATH', 
+                   '$DECEASED_RELIGION', NOW(), 
+                    (SELECT client_id FROM client WHERE client_id  = '$CLIENT'),
+                    (SELECT branch_id FROM branches WHERE branch_id = $BRANCH))  ";
 
 
             if($conn->multi_query($INSERT_RESERVATION) === true)

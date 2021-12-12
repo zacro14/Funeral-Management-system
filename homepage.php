@@ -84,7 +84,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                 <label class="text-capitalize" for="">Date of your Reservation</label>
-                                                    <input id="date" type="text" onfocus="(this.type = 'date')" placeholder="Enter Date" name="date" class="form-control" min="<?php echo date("Y-m-d"); ?>" onchange="checkDate(this.value);" required>
+                                                    <input id="date" type="date"  placeholder="Enter Date" name="date" class="form-control" min="<?php echo date("Y-m-d"); ?>" onchange="checkDate(this.value);" required>
         
                                                 </div>
                                              
@@ -110,7 +110,7 @@
                                             <div class="col-md-4">
                                                 <label for="">Casket Type</label>
                                                     <select name="casket" id="casket-type" class="form-select"  onchange='getPrice(this.value);' required>   
-                                                        <option value="" selected>--- Select Casket Type ---
+                                                        <option value="" selected>-- Select Casket Type --
                                                         </option>
                                                     </select>
                                                     <small class="text-dark font-italic text-capitalize">please select package*</small> 
@@ -123,11 +123,28 @@
                                                     <input id="price" readonly 
                                                     placeholder="0.00" 
                                                     type="text" 
-                                                    value="" 
+                                                    value=""
                                                     class="form-control" 
                                                     aria-label="Amount (Price)"
                                                     required
                                                     >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                        <label for="">Chapel Viewing</label>
+                                            <div class="input-group mb-3">
+                                                <select name="chapel" class="form-select" required>   
+                                                <option value="" disabled selected> Select Chapel </option>
+                                        <?php 
+                                            $fetch_chapel = "SELECT * FROM chapel";
+                                            $query_chapel = $conn->query($fetch_chapel);
+                                        
+                                            while($result_chapel = $query_chapel->fetch_assoc()){ ;?>
+                                            <option value="<?php echo $result_chapel['chapel_id'] ?>"> <?php echo $result_chapel['chapel_name']; ?></option>
+
+                                        <?php  }; ?>
+                                            </select>
                                             </div>
                                         </div>
 

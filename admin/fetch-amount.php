@@ -11,7 +11,7 @@
         while($row = $query->fetch_assoc())
         {   
             echo '<input type="hidden" name="amount" value='.$row['amount'].'></input>';
-            echo "<b><p style='font-size:45px;' class='text-center text-info'>&#8369;".$row['amount']."</p></b>";
+            echo "<b><p style='font-size:45px;' class='text-center text-info'>&#8369;".number_format($row['amount'], 2)."</p></b>";
         }
     }
     exit;

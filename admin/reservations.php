@@ -154,8 +154,8 @@
                                                 $row_res['reservation_status'] == 'APPROVED') ? '<span class="label label-success pull-left">APPROVED</span>':'<span class="label label-warning pull-left">PENDING</span>';?>      
                                                 <tr>
                                                     <td><?php echo $no;?></td>
-                                                    <td><?php echo $row_res['reservation_code'];?></td>
-                                                    <td><?php echo $row_res['client_firstname']. ' ' . $row_res['client_middlename']. ' ' . $row_res['client_lastname'];?></td>
+                                                    <td><a href="view-reservation.php?reservation=<?php echo $row_res['reservation_code'];?> "><?php echo $row_res['reservation_code'] ?> </a></td>
+                                                    <td><a class="text-capitalize" href="view-client.php?client=<?php echo $row_res['client_id'];?>"><?php echo $row_res['client_firstname']. ' ' . $row_res['client_middlename']. ' ' . $row_res['client_lastname'];?></td>
                                                     <td><?php echo date('M d, Y', strtotime($row_res['reservation_date']));?></td>
                                                     <td><?php echo $row_res['branch_name'];?></td>
                                                     <td><?php echo $status;?></td>
@@ -172,7 +172,7 @@
                                                                 {
                                                                     echo '<a href="approve-reservation.php?resno='. $row_res['reservation_code']. '" class="btn btn-sm  btn-info" data-toggle="tooltip" data-placement="top" title="APPROVE RESERVATION"><i class="fa fa-check fa-fw"></i></a>
                                                                     
-                                                                    <a href="cancel-reservation.php" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="CANCEL"><i class="fa fa-times fa-fw"></i></a>';
+                                                                    <a href="cancel-reservation.php" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="CANCEL RESERVATION"><i class="fa fa-times fa-fw"></i></a>';
                                                                 }
                                                             ?>
 														</div>

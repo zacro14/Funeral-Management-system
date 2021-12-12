@@ -150,8 +150,9 @@
                 </div>
             </div>
         </div>
+        <?php include 'includes/modal-contract.php' ?>
     </div>
-    <?php include 'includes/modal-contract.php' ?>
+  
 </div>
 
 <?php include 'includes/scripts.php' ?>

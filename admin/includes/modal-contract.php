@@ -42,14 +42,14 @@
                 <br>
                 <div class="row">
                     <div class="col-md-6">
-                        <h4 class="text-center">Contracting Party</h4>
+                        <h4 class="text-center"><strong>Contracting Party</strong></h4>
                         <b>Name: </b><span class="name"></span><br>
                         <b>Address: </b><span class="address"></span><br>
                         <b>Contact #: </b><span class="contact"></span><br>
                         <b>Relation to deceased: </b><span class="relation"></span>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="text-center">Deceased Details</h4>
+                        <h4 class="text-center"><strong>Deceased Details</strong></h4>
                         <b>Name: </b><span class="d_name"></span><br>
                         <b>Born: </b><span class="born"></span><br>
                         <b>Age: </b><span class="age"></span><br>

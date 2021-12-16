@@ -43,18 +43,18 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h4 class="text-center"><strong>Contracting Party</strong></h4>
-                        <b>Name: </b><span class="name"></span><br>
-                        <b>Address: </b><span class="address"></span><br>
+                        <b>Name: </b><span class="name text-capitalize"></span><br>
+                        <b>Address: </b><span class="address text-capitalize"></span><br>
                         <b>Contact #: </b><span class="contact"></span><br>
-                        <b>Relation to deceased: </b><span class="relation"></span>
+                        <b>Relation to deceased: </b><span class="relation text-capitalize"></span>
                     </div>
                     <div class="col-md-6">
                         <h4 class="text-center"><strong>Deceased Details</strong></h4>
-                        <b>Name: </b><span class="d_name"></span><br>
+                        <b>Name: </b><span class="d_name text-capitalize"></span><br>
                         <b>Born: </b><span class="born"></span><br>
                         <b>Age: </b><span class="age"></span><br>
                         <b>Died: </b><span class="died"></span><br>
-                        <b>Religion: </b><span class="religion"></span>
+                        <b>Religion: </b><span class="religion text-capitalize"></span>
                     </div>
                 </div>
                 <br><br>

@@ -48,7 +48,15 @@
                                     $reservation = "SELECT * FROM reservation LEFT JOIN branches ON reservation.branch_id = branches.branch_id WHERE reservation.client_id = '".$_SESSION['client']."' ORDER BY reservation.reservation_date DESC";
                                     $query = $conn->query($reservation);
                                     $no = 1;
-                                    while($row = $query->fetch_assoc()) { $status = ($row['reservation_status'] === 'APPROVED') ? '<span class="badge rounded-pill bg-success pull-left">APPROVED</span>':'<span class="badge rounded-pill bg-warning pull-left">PENDING</span>';    
+                                    while($row = $query->fetch_assoc()) { 
+                            
+                                        if($row['reservation_status'] === 'APPROVED'){
+                                            $status =  '<span class="badge rounded-pill bg-success pull-left">APPROVE</span>';
+                                        } elseif($row['reservation_status'] === 'PENDING'){
+                                            $status = '<span class="badge rounded-pill bg-danger pull-left">CANCELED</span>';
+                                        }else{
+                                            $status = '<span class="badge rounded-pill bg-warning pull-left">PENDING</span>';   
+                                        }
                                     ?>
                                     
                                     <tr>

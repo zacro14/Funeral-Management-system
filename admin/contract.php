@@ -122,7 +122,13 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $select_contract = "SELECT * FROM contract LEFT JOIN client ON contract.client_id = client.client_id LEFT JOIN service ON contract.service_id = service.service_id LEFT JOIN deceased ON deceased.deceased_id = contract.deceased_id LEFT JOIN branches ON branches.branch_id = contract.branch_id WHERE branches.branch_id = '".$user['branch_id']."'";
+                                            $select_contract = "SELECT * FROM contract 
+                                                                LEFT JOIN client ON contract.client_id = client.client_id 
+                                                                LEFT JOIN service ON contract.service_id = service.service_id 
+                                                                LEFT JOIN deceased ON deceased.deceased_id = contract.deceased_id 
+                                                                LEFT JOIN branches ON branches.branch_id = contract.branch_id 
+                                                                LEFT JOIN chapel USING (chapel_id)";
+                                                                
                                             $query_contract = $conn->query($select_contract);
                                             $no=1;
                                             while($row_contract = $query_contract->fetch_assoc()) { ?>
@@ -164,7 +170,7 @@ $(function(){
    {
        e.preventDefault();
        $('#view').modal('show');
-       var id = $(this).data('id');
+       var id = $(this).attr('data-id');
        ViewContract(id);
    });
 });
@@ -192,6 +198,8 @@ function ViewContract(id){
             $('.amount').html(response.amount);
             $('.payment').html(response.payment_amount);
             $('.balance').html(response.balance);
+            $('.chapel').html(response.chapel_name);
+            $('.address').html(response.address);
         }
     });
 }

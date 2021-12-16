@@ -116,19 +116,19 @@
        <section class="features-icons bg-light"  id="services" >
            <div class="container">
            <h3 class="fw-bold text-center">Our Services</h3>
-           <div class="row">
-           <?php $fetch_res = "SELECT * from service";
+           <div class="row g-2">
+           <?php $fetch_res = "SELECT * from casket INNER JOIN service USING(service_id)";
                     $query_res = $conn->query($fetch_res); 
                      while($services = $query_res->fetch_assoc())
                     {
                     ?>
-                     <div class="col-md-3">
+                     <div class="col-md-4">
                         <div class="card">
                             <img class="card-img-top" src="design/assets/img/logo.jpeg" alt="Image">
                             <div class="card-body">
-                                <h5 class="card-title"><?php echo $services['service']; ?></h5>
-                                <p class="card-text"><b>Package Inclusion: </b> <?php echo $services['package_include']; ?></p>
-                                <a  data-bs-toggle="modal" class="btn btn-custom">View More</a>
+                                <h5 class="card-title"><?php echo $services['casket_type']; ?></h5>
+                                <p class="card-text"><b>Service Type:  </b> <?php echo $services['service']; ?></p>
+                                <span class="card-text"><b>Price:</b>  &#8369;<?php echo number_format($services['amount'], 2) ?></span>
                             </div>
                         </div>
                     </div>

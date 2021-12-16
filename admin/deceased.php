@@ -139,8 +139,8 @@
                                                     <td>
 														<div class="btn-group btn-group-sm">
                                                             <button class="edit-deceased btn btn-primary btn-sm" data-id="<?php echo $row_deceased['deceased_id']; ?>"><i class="fa fa-edit"></i> </button>
-                                                            <!--
-                                                            <button class="delete-deceased  btn btn-danger btn-sm" data-id="<?php echo $row_deceased['deceased_id']; ?>"><i class="fa fa-trash"></i> </button> -->
+                                                            
+                                                            <button class="delete-deceased  btn btn-danger btn-sm" data-id="<?php echo $row_deceased['deceased_id']; ?>"><i class="fa fa-trash"></i> </button> 
 														</div>
 													</td>
                                                 </tr>

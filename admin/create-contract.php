@@ -138,7 +138,7 @@
                         <div class="form-group">
                             <label for="">Deceased Name:</label>
                             <select name="deceased" id="deceased" class="form-control" onchange="fetchInfo(this.value);" required>
-                                <option value="" disabled selected>-Select Deceased-</option>
+                                <option value="" selected>-Select Deceased-</option>
                             </select>
                         </div>
                     </div>
@@ -154,8 +154,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Service</label>
-                            <select name="service" id="" class="form-control" onchange="fetchService(this.value);">
-                                <option value="" disabled selected>-Select Service-</option>
+                            <select name="service" id="" class="form-control" onchange="fetchService(this.value);" required>
+                                <option value="" selected>-Select Service-</option>
                                     <?php
                                         $select = "SELECT * FROM service    ";
                                         $query = $conn->query($select);

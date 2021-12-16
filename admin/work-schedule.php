@@ -98,7 +98,12 @@
                     <h3 class="page-header">Work Schedule</h3>
                 </div>
             </div>
-            <div class="row">
+            <div class ="row">
+                <div class="col-lg-12">
+                    <div id='calendar'></div>
+                </div>
+            </div>  
+            <div class="row " style="margin-top: 10px">
                 <div class="col-lg-12">
                     <a href="add-schedule.php" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Schedule</a>
                 </div>

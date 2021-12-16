@@ -35,28 +35,35 @@
         </thead>
         <tbody>
             <?php
-                while($rows = $query_res->fetch_assoc()){ $status_ = ($status == 'APPROVED') ?'<span class="label label-success pull-left">APPROVED</span>':'<span class="label label-warning pull-left">PENDING</span>';?>      
+                while($rows = $query_res->fetch_assoc()){ 
+                    if($rows['reservation_status'] === 'APPROVED'){
+                        $status = '<span class="label label-success pull-left">APPROVED</span>';
+                    } elseif( $rows['reservation_status'] === 'CANCELED'){
+                        $status = '<span class="label label-danger pull-left">CANCELED</span>';
+                    } else{
+                        $status = '<span class="label label-warning pull-left">PENDING</span>';
+                    } ?>   
                 <tr>
                     <td><?php echo $no;?></td>
-                    <td><?php echo $rows['reservation_code'];?></td>
+                    <td><a href="view-reservation.php?reservation=<?php echo $rows['reservation_code'];?> "><?php echo $rows['reservation_code'] ?> </a></td>
                     <td><?php echo $rows['client_firstname']. ' ' . $rows['client_middlename']. ' ' . $rows['client_lastname'];?></td>
                     <td><?php echo date('M d, Y', strtotime($rows['reservation_date']));?></td>
                     <td><?php echo $rows['branch_name'];?></td>
-                    <td><?php echo $status_;?></td>
+                    <td><?php echo $status;?></td>
                     <td>
 						<div class="btn-group btn-group-sm">
                             <?php
                                 if($rows['reservation_status'] == 'APPROVED')
                                 {
-                                    echo '<a href="view-contract.php" class="btn btn-sm  btn-success" data-toggle="tooltip" data-placement="top" title="VIEW DETAILS"><i class="fa fa-eye fa-fw"></i></a>
+                                    echo '<a href="view-reservation.php?reservation='.$rows['reservation_code'].'" class="btn btn-sm  btn-success" data-toggle="tooltip" data-placement="top" title="VIEW DETAILS"><i class="fa fa-eye fa-fw"></i></a>
                                     <a href="edit-reservation.php" class="btn btn-sm btn-outline btn-primary" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="fa fa-edit fa-fw"></i></a>
                                     <a href="delete-reservation.php" class="btn btn-sm btn-outline btn-danger"><i class="fa fa-trash fa-fw"></i></a>';
                                 }
-                                else
-                                {
+                                else{
                                     echo '<a href="create-contract.php" class="btn btn-sm  btn-info" data-toggle="tooltip" data-placement="top" title="CREATE CONTRACT"><i class="fa fa-file-text fa-fw"></i></a>
                                     <a href="create-contract.php" class="btn btn-sm btn-outline btn-primary" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="fa fa-edit fa-fw"></i></a>';
                                 }
+                            
                             ?>
 						</div>
 					</td>

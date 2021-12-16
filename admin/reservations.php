@@ -103,6 +103,7 @@
                              <option value="" disabled selected>-Filter by Status-</option>
                             <option value="APPROVED" >APPROVED</option>
                             <option value="PENDING" >PENDING</option>
+                            <option value="CANCELED" >CANCELED</option>
                         </select>
                     </div>
                 </div>
@@ -147,11 +148,22 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $fetch_res = "SELECT * FROM reservation LEFT JOIN client ON client.client_id = reservation.client_id LEFT JOIN branches ON branches.branch_id = reservation.branch_id  ORDER BY reservation.reservation_date, reservation.reservation_status = 'PENDING' ";
+                                            $fetch_res = "SELECT * FROM reservation 
+                                            LEFT JOIN client ON client.client_id = reservation.client_id 
+                                            LEFT JOIN branches ON branches.branch_id = reservation.branch_id  
+                                            ORDER BY reservation.reservation_date, reservation.reservation_status = 'PENDING' ";
                                             $query_res = $conn->query($fetch_res);
                                             $no = 1;
-                                            while($row_res = $query_res->fetch_assoc()){ $status = (
-                                                $row_res['reservation_status'] == 'APPROVED') ? '<span class="label label-success pull-left">APPROVED</span>':'<span class="label label-warning pull-left">PENDING</span>';?>      
+                                            while($row_res = $query_res->fetch_assoc())
+                                            {  
+                                                if($row_res['reservation_status'] === 'APPROVED'){
+                                                    $status = '<span class="label label-success pull-left">APPROVED</span>';
+                                                } elseif( $row_res['reservation_status'] === 'CANCELED'){
+                                                    $status = '<span class="label label-danger pull-left">CANCELED</span>';
+                                                } else{
+                                                    $status = '<span class="label label-warning pull-left">PENDING</span>';
+                                                }
+                                                ?>      
                                                 <tr>
                                                     <td><?php echo $no;?></td>
                                                     <td><a href="view-reservation.php?reservation=<?php echo $row_res['reservation_code'];?> "><?php echo $row_res['reservation_code'] ?> </a></td>
@@ -164,7 +176,7 @@
                                                             <?php
                                                                 if($row_res['reservation_status'] == 'APPROVED')
                                                                 {
-                                                                    echo '<a href="view-contract.php" class="btn btn-sm  btn-success" data-toggle="tooltip" data-placement="top" title="VIEW DETAILS"><i class="fa fa-eye fa-fw"></i></a>
+                                                                    echo '<a href="view-reservation.php?reservation='.$row_res['reservation_code'].'" class="btn btn-sm  btn-success" data-toggle="tooltip" data-placement="top" title="VIEW DETAILS"><i class="fa fa-eye fa-fw"></i></a>
                                                                     
                                                                     <a href="delete-reservation.php" class="btn btn-sm btn-danger"><i class="fa fa-trash fa-fw"></i></a>';
                                                                 }

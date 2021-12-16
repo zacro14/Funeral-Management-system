@@ -35,7 +35,9 @@
 
             $query_deceased = $conn->query($sql);
             $result_deseceased = $query_deceased->fetch_assoc();
+
     ?>
+
 
     <!-- SIDEBAR -->
 
@@ -126,20 +128,40 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
+              
                     <h3 class="page-header text-capitalize">reservation <b><?php echo $RES_NO ?></b></h3>
                 </div>
             </div>
            
             <br>
-            
+           
             <form action="create-contract-query.php" method="POST">
                 <div class ="container-fluid">
+                <?php 
+                   if(isset($_SESSION['error-approved-reservation'])){
+                    echo "
+                        <div class='alert alert-danger alert-dismissible'>
+                            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                            <i class='fa fa-exclamation fa-lg'></i>".$_SESSION['error-approved-reservation']."
+                        </div>
+                    ";
+                    unset($_SESSION['error-approved-reservation']);
+                }
+                if(isset($_SESSION['success-approved-reservation'])){
+                    echo "
+                        <div class='alert alert-success alert-dismissible'>
+                            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                            <i class='fa fa-check fa-lg'></i>".$_SESSION['success-approved-reservation']."
+                        </div>
+                    ";
+                    unset($_SESSION['success-approved-reservation']);
+                }
+                ?>
                 <h3 class="text-capitalize text-center "> reservation details</h3>
-                    <div class="row">
-                   
+                  
                     <dl class="dl-horizontal col-sm-6">
                         <dt class="text-capitalize">reservation code</dt>
-                        <dd> <?php echo $result_res['reservation_code'] ?></dd>
+                        <dd><b><a href="reservations.php"><?php echo $result_res['reservation_code'] ?></a></b></dd>
                         
                         <dt class="text-capitalize">reservation date</dt>
                         <dd> <?php echo $result_res['reservation_date'] ?></dd>
@@ -183,9 +205,7 @@
                         <dt class="text-capitalize">created</dt>
                         <dd> <?php echo $result_res['client_application_date'] ?></dd>
 
-                    </dl>
-
-                </div>  
+                    </dl> 
                     
                 </div>
                 <div class="row mt-5">
@@ -197,18 +217,53 @@
                     </button>
                 </div>
                 <div class="col-sm-1">
-                    <a href="" class="btn btn-primary" data-ds-toogle="tooltip"  title="THIS WILL CANCEL THE RESERVATION"></i>Cancel</a>
+                    <button type="button" 
+                        data-toggle="modal" 
+                        data-target="#cancelreservation"
+                        data-ds-toogle="tooltip"  
+                        title="THIS WILL CANCEL THE RESERVATION"
+                        class="btn btn-primary">Cancel
+                    </button>
                 </div>
                 <div class="col-sm-1">
                     <button type="button" 
                         data-toggle="modal" 
-                        data-target="#delete-reservation" 
-                        class="btn btn-primary">delete
+                        data-target="#modifyreservation"
+                        data-ds-toogle="tooltip"  
+                        title="modify"
+                        class="btn btn-primary">Modify
+                    </button>
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" 
+                        data-toggle="modal" 
+                        data-target="#deletereservation" 
+                        class="btn btn-primary">Delete
                     </button>
                 </div>
 
                 <div class="col-sm-1">
-                    <a href="approve-reservation.php?resno=<?php echo $RES_NO ?>" class="btn btn-primary text-capitalize" data-ds-toogle="tooltip" title="CREATE CONTRACT"></i>create contract</a>
+                    <?php 
+                        if($result_res['reservation_status'] === 'APPROVED'){
+                            echo '<a href="approve-reservation.php?resno='.$RES_NO.' " 
+                                class="btn btn-primary text-capitalize" 
+                                data-ds-toogle="tooltip" 
+                                title="CREATE CONTRACT"
+                                >
+                                create contract
+                                </a>';
+                        }else{
+                            echo '<a href="approve-reservation.php?resno='.$RES_NO.' " 
+                            class="btn btn-primary text-capitalize invisible" 
+                            data-ds-toogle="tooltip" 
+                            title="CREATE CONTRACT"
+                            >
+                            create contract
+                            </a>';
+                        }
+                    
+                    ?>
+                  
                 </div>
             </div>
             </form>
@@ -216,7 +271,14 @@
     </div>
 </div>
 
-<?php include ('includes/modal-approve-reservation.php') ?>
+<?php 
+    include ('includes/modal-approve-reservation.php');
+    include('includes/modal-cancel-reservation.php');
+    include('includes/modal-delete-reservation.php');
+    include('includes/modal-modify-reservation.php');
+
+
+?>
 <?php include 'includes/scripts.php'; ?>
 
 <script type="text/javascript">
@@ -237,6 +299,22 @@ function fetchInfo(val)
     });
     
 }
+function getCasketAmount(val)
+{
+    $.ajax({
+        type: 'post',
+        url: 'fetch-casket-amount.php',
+        data: {
+        id:val
+        },
+        dataType: 'json',
+        success: function (response) {
+            document.getElementById("modify_amount").innerText=response.amount;
+            document.getElementById("update_price").value = response.casket_id;
+        }
+    });
+}
+
 function fetchAmount(val)
 {
     $.ajax({
@@ -266,7 +344,7 @@ function fetchService(val)
             $(".casket").html("Loading");
         },
         success: function (response) {
-            document.getElementById("casket").innerHTML=response; 
+            document.getElementById("casket").innerHTML=response;
         }
     });
 }
@@ -285,6 +363,7 @@ function fetchDeceased(val){
         
     })
 }
+
 
 </script>
 

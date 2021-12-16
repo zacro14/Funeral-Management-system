@@ -111,7 +111,8 @@
                                     <thead>
                                         <th>#</th>
                                         <th>Client</th>
-                                        <th>Total Amount</th>
+                                        <th>Casket Amount</th>
+                                        <th>Payment Amount</th>
                                         <th>Balance</th>
                                         <th>Status</th>
                                         <th>Contract</th>
@@ -119,10 +120,17 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $fetch_payment = "SELECT payments.payment_id, payments.payment_amount, payments.balance, payments.status, contract.contract_unique_id, client.client_firstname, client.client_middlename, client.client_lastname, branches.branch_name, branches.branch_address FROM (((payments
-                                                INNER JOIN client ON payments.client_id = client.client_id)
-                                                INNER JOIN contract ON payments.contract_id = contract.contract_id)
-                                                INNER JOIN branches ON branches.branch_id = branches.branch_id) WHERE branches.branch_id = '".$user['branch_id']."'";
+                                            // $fetch_payment = "SELECT payments.payment_id, payments.payment_amount, payments.balance, payments.status, contract.contract_unique_id, client.client_firstname, client.client_middlename, client.client_lastname, branches.branch_name, branches.branch_address FROM (((payments
+                                            //     INNER JOIN client ON payments.client_id = client.client_id)
+                                            //     INNER JOIN contract ON payments.payment_id = contract.contract_id)
+                                            //     INNER JOIN branches ON branches.branch_id = branches.branch_id) WHERE branches.branch_id = '".$user['branch_id']."'";
+
+                                            $fetch_payment ="SELECT * FROM payments 
+                                                            INNER JOIN contract ON contract.contract_unique_id = payments.contract_id 
+                                                            INNER JOIN client ON client.client_id = payments.client_id 
+                                                            INNER JOIN casket ON casket.casket_id = payments.casket_id
+                                                            INNER JOIN branches ON branches.branch_id = payments.branch_id";
+                    
                                             $query_payments = $conn->query($fetch_payment);
                                             $no = 1;
                                             while($row_payments = $query_payments->fetch_assoc())
@@ -130,7 +138,7 @@
                                                 <tr>
                                                     <td><?php echo $no;?></td>
                                                     <td><?php echo $row_payments['client_firstname']. ' ' . $row_payments['client_middlename']. ' ' . $row_payments['client_lastname'];?></td>
-                                                    
+                                                    <td><?php echo $row_payments['amount'] ?></td>
                                                     <td><?php echo $row_payments['payment_amount']; ?></td>
                                                     <td><?php echo $row_payments['balance'];?> </td>
                                                     <td><?php echo $status;?> </td>
@@ -183,8 +191,8 @@
     </div>
 
 </div>
-
 <?php include 'includes/modal-contract.php' ?>
+<?php include 'includes/modals.php' ?>
 <?php include 'includes/scripts.php' ?>
 
 <script>
@@ -247,6 +255,7 @@ function ViewContract(id){
             $('.amount').html(response.amount);
             $('.payment').html(response.payment_amount);
             $('.balance').html(response.balance);
+            $('.chapel').html(response.chapel_name);
         }
     });
 }

@@ -10,7 +10,7 @@
         $casket = $_POST['casket'];
        
         $charges = $_POST['charges'];
-        $amount = $_POST['amount'];
+        $amount = $_POST['partial_payment'];
         $partial_payment = $_POST['partial_payment'];
         
         $balance = $amount-$partial_payment;
@@ -24,12 +24,15 @@
 
         $contract_uid = 'CNTRCT'.$Y.substr(str_shuffle($numbers), 0,5);
 
-        $insert_contract = "INSERT INTO contract (contract_unique_id, relation_to_deceased, other_charges, amount, date,  client_id, service_id, deceased_id, casket_id, branch_id) VALUES ('$contract_uid','$relation','$charges','$amount', NOw(),'$client','$service','$deceased', '$casket', '".$user['branch_id']."')";
+        $insert_contract = "INSERT INTO contract 
+        (contract_unique_id, relation_to_deceased, other_charges, amount, date,  client_id, service_id, deceased_id, casket_id, branch_id) 
+        VALUES ('$contract_uid','$relation','$charges','$amount', NOw(),'$client','$service','$deceased', '$casket', '".$user['branch_id']."')";
 
         $query_contract = $conn->query($insert_contract);
         if($query_contract===true)
         {
-            $insert_payment = "INSERT INTO payments (payment_amount, balance, status, contract_id, client_id, branch_id) VALUES ('$partial_payment','$balance','$status','$contract_uid','$client', '".$user['branch_id']."')";
+            $insert_payment = "INSERT INTO payments (payment_amount, balance, status, contract_id, client_id, branch_id) 
+            VALUES ('$partial_payment','$balance','$status','$contract_uid','$client', '".$user['branch_id']."')";
 
             $query_payment = $conn->query($insert_payment);
             if($query_payment===true)

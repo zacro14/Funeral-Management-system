@@ -5,16 +5,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title text-capitalize" id="exampleModalLabel">approve reservation</h4>
+        <h4 class="modal-title text-capitalize" id="exampleModalLabel"> reservation details</h4>
       </div>
+     
       <div class="modal-body">
-        <form>
-            <h3 class="control-label text-capitalize">Summary of reservation</h3>
+      <form action="reservation-approve-query.php" method="POST">
             <div class="container-fluid">
             <dl class="dl-horizontal">
-               
+              <input type="hidden" name="rescode" value="<?php echo $result_res['reservation_code'] ?>"> </input>
                         <dt class="text-capitalize">reservation code</dt>
-                        <dd> <?php echo $result_res['reservation_code'] ?></dd>
+                        <dd name="rescode" > <?php echo $result_res['reservation_code'] ?></dd>
                         
                         <dt class="text-capitalize">reservation date</dt>
                         <dd> <?php echo $result_res['reservation_date'] ?></dd>
@@ -36,12 +36,15 @@
                
                     </dl>
                 </div>
-        </form>
+
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success text-capitalize" name="approved-reservation">approve reservation</button>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary text-capitalize">approve reservation</button>
+      </form>
+
       </div>
+      
     </div>
   </div>
 </div>

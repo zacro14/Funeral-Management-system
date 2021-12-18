@@ -124,7 +124,7 @@
                 <h5 class="modal-title">EDIT - <b><span class="casket"></span></b></h5>
             </div>
             <div class="modal-body">
-                <form action="edit-casket.php" method="POST">
+                <form action="edit-casket.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" class="casket-id" name="casket_id">
                     <div class="row">
                         <div class="col-md-6">
@@ -137,6 +137,30 @@
                             <div class="form-group">
                                 <label for="">Amount</label>
                                     <input type="number" class="form-control" id="amount" name="amount" value=""  placeholder="Enter here..." required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Package Type</label>
+                                <select class="form-control" id="package-type" name="package-type"aria-label="Default select example" required>
+                                    <option value=""disabled selected>--Select Package Type--</option>
+                                    <?php
+                                        $select = "SELECT * FROM service";
+                                        $query = $conn->query($select);
+                                        while($row = $query->fetch_assoc())
+                                            {
+                                                echo "<option value='".$row['service_id']."'>".$row['service'] ."</option>";
+                                            }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Casket Image</label>
+                                    <input type="file" class="form-control" id="casketimage" name="file"/>
                             </div>
                         </div>
                     </div>

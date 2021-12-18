@@ -217,10 +217,12 @@ function fetchData(id){
         url: 'fetch-casket.php',
         data: {id:id},
         dataType: 'json',
-        success: function(response){   
+        success: function(response){  
+            console.log(response)
             $('.casket').html(response.casket_type);
             $('.casket-qty-id').val(response.casket_qty_id);
             $('.casket-id').val(response.casket_id);
+            $('.package-type').text(response.service);
             $('#casket').val(response.casket_type);
             $('#amount').val(response.amount);
             

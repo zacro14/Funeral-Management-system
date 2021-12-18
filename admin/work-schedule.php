@@ -1,6 +1,24 @@
 <?php include 'includes/header.php' ?>
 <body>
+<script>
 
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      editable: false,
+      selectable: true,
+      businessHours: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: {
+          url: 'fetch-work.php'
+      },
+    });
+
+    calendar.render();
+  });
+
+</script>
 <div id="wrapper">
     <?php include 'includes/nav.php' ?>
 
@@ -127,7 +145,10 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $sched = "SELECT * FROM work_schedule LEFT JOIN employee ON employee.employee_id = work_schedule.employee_id LEFT JOIN branches ON branches.branch_id = work_schedule.branch_id WHERE branches.branch_id = '".$user['branch_id']."'";
+                                            $sched = "SELECT * FROM work_schedule 
+                                                        LEFT JOIN employee ON employee.employee_id = work_schedule.employee_id 
+                                                        LEFT JOIN branches ON branches.branch_id = work_schedule.branch_id 
+                                                        WHERE branches.branch_id = '".$user['branch_id']."'";
                                             $query = $conn->query($sched);
                                             $no=1;
                                             while($row = $query->fetch_assoc()) { ?>
@@ -139,7 +160,7 @@
                                                             
                                                             <button class="edit-sched btn btn-primary btn-sm" data-id="<?php echo $row['work_schedule_id']; ?>"><i class="fa fa-edit"></i> </button>
                                                            
-                                                            <button class="delete-sched  btn btn-danger btn-sm" data-id="<?php echo $row_service['work_schedule_id']; ?>"><i class="fa fa-trash"></i> </button> 
+                                                            <button class="delete-sched  btn btn-danger btn-sm" data-id="<?php echo $row['work_schedule_id']; ?>"><i class="fa fa-trash"></i> </button> 
 														</div></td>
                                                 </tr>
                                             

@@ -41,7 +41,11 @@
                                         <th>Action</th>
                                     </thead>
                                         <?php
-                                            $select_casket = "SELECT * FROM casket LEFT JOIN service ON service.service_id = casket.service_id LEFT JOIN casket_qty ON casket_qty.casket_id = casket.casket_id LEFT JOIN branches ON branches.branch_id = casket_qty.branch_id WHERE branches.branch_id = '".$user['branch_id']."'";
+                                            $select_casket =    "SELECT * FROM casket 
+                                                                LEFT JOIN service ON service.service_id = casket.service_id 
+                                                                LEFT JOIN casket_qty ON casket_qty.casket_id = casket.casket_id 
+                                                                LEFT JOIN branches ON branches.branch_id = casket_qty.branch_id 
+                                                                WHERE branches.branch_id = '".$user['branch_id']."'";
                                             $query = $conn->query($select_casket);
                                             $no=1;
                                             while($row = $query->fetch_assoc()) { ?>

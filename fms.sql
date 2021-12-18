@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 02:21 AM
+-- Generation Time: Dec 18, 2021 at 03:05 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -91,6 +91,7 @@ CREATE TABLE `casket` (
   `casket_id` int(11) NOT NULL,
   `casket_type` text NOT NULL,
   `amount` double(10,2) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `service_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -98,12 +99,12 @@ CREATE TABLE `casket` (
 -- Dumping data for table `casket`
 --
 
-INSERT INTO `casket` (`casket_id`, `casket_type`, `amount`, `service_id`) VALUES
-(1, 'Ordinary Rounded Top Wood Casket', 25000.00, 1),
-(2, 'DAHLIA Wood Casket', 45000.00, 2),
-(3, 'METAL Casket Full Cap', 80000.00, 3),
-(4, 'ORIB Wood Casket', 30000.00, 2),
-(5, 'FLEXI Metal Casket Full Cap', 150000.00, 3);
+INSERT INTO `casket` (`casket_id`, `casket_type`, `amount`, `image`, `service_id`) VALUES
+(1, 'Ordinary Rounded Top Wood Casket', 25000.00, '', 1),
+(2, 'DAHLIA Wood Casket', 45000.00, 'DAHLIA WOOD casket.jpg', 2),
+(3, 'METAL Casket Full Cap', 80000.00, 'METAL Casket Full Cap.jpg', 3),
+(4, 'ORIB Wood Casket', 30000.00, 'ORIB WOOD casket.jpg', 2),
+(5, 'FLEXI Metal Casket Full Cap', 150000.00, 'FLEXI METAL Full Cap.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -123,10 +124,11 @@ CREATE TABLE `casket_qty` (
 --
 
 INSERT INTO `casket_qty` (`casket_qty_id`, `quantity`, `casket_id`, `branch_id`) VALUES
-(1, 9, 1, 1),
-(2, 7, 2, 1),
-(3, 4, 1, 2),
-(4, 3, 2, 2);
+(1, 8, 1, 1),
+(2, 6, 2, 1),
+(3, 4, 3, 2),
+(4, 1, 4, 2),
+(5, 2, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -148,7 +150,8 @@ INSERT INTO `chapel` (`chapel_id`, `chapel_name`, `branch`) VALUES
 (1, 'CHAPEL 1', 1),
 (2, 'CHAPEL 2', 1),
 (3, 'CHAPEL 3', 1),
-(4, 'CHAPEL 4', 1);
+(4, 'CHAPEL 4', 1),
+(5, 'NONE', 1);
 
 -- --------------------------------------------------------
 
@@ -198,17 +201,18 @@ CREATE TABLE `contract` (
   `deceased_id` int(11) NOT NULL,
   `casket_id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `payment_id` int(11) NOT NULL
+  `chapel_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contract`
 --
 
-INSERT INTO `contract` (`contract_id`, `contract_unique_id`, `relation_to_deceased`, `other_charges`, `amount`, `address`, `date`, `client_id`, `service_id`, `deceased_id`, `casket_id`, `branch_id`, `payment_id`) VALUES
+INSERT INTO `contract` (`contract_id`, `contract_unique_id`, `relation_to_deceased`, `other_charges`, `amount`, `address`, `date`, `client_id`, `service_id`, `deceased_id`, `casket_id`, `branch_id`, `chapel_id`) VALUES
 (1, 'CNTRCT202145970', 'Son', 'None', 45000, '', '2021-12-03', 20, 2, 1, 2, 1, 1),
-(2, 'CNTRCT202187210', 'Step-Father', 'None', 45000, '', '2021-12-03', 19, 2, 2, 1, 1, 2),
-(3, 'CNTRCT202158623', 'Brother', 'None', 45000, 'sipocot', '2021-12-03', 18, 2, 3, 2, 1, 3);
+(50, 'CNTRCT202197248', 'son', 'none', 30000, '', '2021-12-14', 23, 2, 13, 4, 2, 4),
+(53, 'CNTRCT202137296', 'son', 'none', 30000, '', '2021-12-14', 23, 2, 13, 4, 2, 1),
+(62, 'CNTRCT202149756', 'niece', 'none', 150000, 'Tara, Sipocot Camarines Sur', '2021-12-16', 23, 3, 13, 5, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -246,7 +250,7 @@ INSERT INTO `deceased` (`deceased_id`, `deceased_fname`, `deceased_mname`, `dece
 (16, 'sfg', 'ggg', 'gtg', '2022-01-01', '2021-12-27', '0 Year(s)', 'fff', 'ghgh', '', '2021-12-09 19:52:12', 23, 1),
 (17, 'rgt', 'g', 'thgh', '2021-12-22', '2021-12-28', '0 Year(s)', 'ghg', 'ghgg', '', '2021-12-09 19:54:08', 23, 2),
 (18, 'ghghgh', 'hgh', 'ghg', '2022-01-05', '2021-12-28', '0 Year(s)', 'ghgh', 'ghg', '', '2021-12-09 19:55:08', 23, 2),
-(19, '0[p[', '[p[p', 'p[p[', '2019-06-04', '2021-12-29', '2 Year(s)', 'p[p[', 'p[p[p', '', '2021-12-12 09:10:00', 23, 1),
+(19, 'loe', 'biden', 'joe', '2021-10-08', '2019-06-04', '2 Year(s)', 'cancer', 'catholic', '', '2021-12-12 09:10:00', 23, 1),
 (20, 'rodulf', 'smik', 'hjhjh', '2021-10-22', '2021-12-21', '1 Month(s)', 'hjhj', 'hjh', '', '2021-12-12 09:14:38', 23, 1),
 (21, 'HJHJ', 'JJ', 'HJH', '2021-10-27', '2021-12-10', '0 Year(s)', 'HJ', 'HJJH', '', '2021-12-12 17:32:38', 23, 1),
 (22, 'RT', 'HTH', 'HH', '2021-10-08', '2021-12-23', '0 Year(s)', 'HGHH', 'GHGH', '', '2021-12-12 17:44:28', 23, 1),
@@ -283,10 +287,10 @@ INSERT INTO `employee` (`employee_id`, `employee_fname`, `employee_mname`, `empl
 
 CREATE TABLE `payments` (
   `payment_id` int(11) NOT NULL,
+  `contract_id` varchar(255) NOT NULL,
   `payment_amount` double(10,2) NOT NULL,
   `balance` double(10,2) NOT NULL,
   `status` text NOT NULL,
-  `contract_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `deceased_id` int(11) NOT NULL,
@@ -298,10 +302,11 @@ CREATE TABLE `payments` (
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`payment_id`, `payment_amount`, `balance`, `status`, `contract_id`, `client_id`, `branch_id`, `deceased_id`, `service_id`, `casket_id`) VALUES
-(1, 40000.00, 5000.00, 'NOT FULLY PAID', 1, 20, 1, 1, 1, 1),
-(2, 20000.00, 5000.00, 'NOT FULLY PAID', 2, 19, 1, 2, 2, 2),
-(3, 45000.00, 0.00, 'FULLY PAID', 3, 18, 1, 3, 3, 2);
+INSERT INTO `payments` (`payment_id`, `contract_id`, `payment_amount`, `balance`, `status`, `client_id`, `branch_id`, `deceased_id`, `service_id`, `casket_id`) VALUES
+(1, 'CNTRCT202145970', 45000.00, 0.00, 'FULLY PAID', 20, 1, 1, 1, 1),
+(5, 'CNTRCT202197248', 300.00, 5000.00, 'NOT FULLY PAID', 23, 1, 19, 1, 1),
+(10, 'CNTRCT202137296', 677.00, 29323.00, 'NOT FULLY PAID', 23, 2, 13, 1, 1),
+(16, 'CNTRCT202149756', 10000.00, 140000.00, 'NOT FULLY PAID', 23, 1, 13, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -331,7 +336,7 @@ INSERT INTO `reservation` (`reservation_id`, `reservation_code`, `reservation_da
 (10, 'RES202127930', '2021-12-17', '', 'PENDING', 1, 21, 2, 4),
 (49, 'RES202123470', '2022-02-14', 'son', 'APPROVED', 2, 23, 4, 2),
 (50, 'RES202189531', '2022-01-26', 'granfather', 'CANCELED', 2, 23, 4, 3),
-(52, 'RES202145329', '2021-12-29', 'jhj', 'APPROVED', 1, 23, 4, 4);
+(52, 'RES202145329', '0000-00-00', 'jhj', 'APPROVED', 1, 23, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -364,6 +369,7 @@ CREATE TABLE `work_schedule` (
   `work_schedule_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
+  `title` varchar(255) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -372,8 +378,10 @@ CREATE TABLE `work_schedule` (
 -- Dumping data for table `work_schedule`
 --
 
-INSERT INTO `work_schedule` (`work_schedule_id`, `date`, `time`, `employee_id`, `branch_id`) VALUES
-(2, '2021-12-06', '09:00:00', 1, 1);
+INSERT INTO `work_schedule` (`work_schedule_id`, `date`, `time`, `title`, `employee_id`, `branch_id`) VALUES
+(1, '2021-12-31', '08:16:26', 'chapel 4', 1, 1),
+(2, '2021-12-06', '09:00:00', 'chapel 1', 1, 1),
+(3, '2021-12-31', '10:52:00', '', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -455,7 +463,8 @@ ALTER TABLE `contract`
   ADD KEY `service_id` (`service_id`),
   ADD KEY `deceased_id` (`deceased_id`),
   ADD KEY `casket_id` (`casket_id`),
-  ADD KEY `payment_id` (`payment_id`);
+  ADD KEY `chapel_id` (`chapel_id`),
+  ADD KEY `chapel_id_2` (`chapel_id`);
 
 --
 -- Indexes for table `deceased`
@@ -479,7 +488,6 @@ ALTER TABLE `payments`
   ADD PRIMARY KEY (`payment_id`),
   ADD KEY `client_id` (`client_id`),
   ADD KEY `branch_id` (`branch_id`),
-  ADD KEY `contract_id` (`contract_id`) USING BTREE,
   ADD KEY `deceased_id` (`deceased_id`),
   ADD KEY `service_id` (`service_id`),
   ADD KEY `casket_id` (`casket_id`);
@@ -546,13 +554,13 @@ ALTER TABLE `casket`
 -- AUTO_INCREMENT for table `casket_qty`
 --
 ALTER TABLE `casket_qty`
-  MODIFY `casket_qty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `casket_qty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `chapel`
 --
 ALTER TABLE `chapel`
-  MODIFY `chapel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `chapel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `client`
@@ -564,7 +572,7 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT for table `contract`
 --
 ALTER TABLE `contract`
-  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `deceased`
@@ -582,7 +590,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `reservation`
@@ -600,7 +608,7 @@ ALTER TABLE `service`
 -- AUTO_INCREMENT for table `work_schedule`
 --
 ALTER TABLE `work_schedule`
-  MODIFY `work_schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `work_schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `work_type`
@@ -640,12 +648,11 @@ ALTER TABLE `chapel`
 -- Constraints for table `contract`
 --
 ALTER TABLE `contract`
-  ADD CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`casket_id`) REFERENCES `casket` (`casket_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `contract_ibfk_3` FOREIGN KEY (`deceased_id`) REFERENCES `deceased` (`deceased_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `contract_ibfk_4` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `contract_ibfk_5` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`branch_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `contract_ibfk_6` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `contract_ibfk_6` FOREIGN KEY (`chapel_id`) REFERENCES `chapel` (`chapel_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `deceased`
@@ -664,9 +671,7 @@ ALTER TABLE `employee`
 -- Constraints for table `payments`
 --
 ALTER TABLE `payments`
-  ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`branch_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `payments_ibfk_3` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `payments_ibfk_4` FOREIGN KEY (`deceased_id`) REFERENCES `deceased` (`deceased_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `payments_ibfk_5` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `payments_ibfk_6` FOREIGN KEY (`casket_id`) REFERENCES `casket` (`casket_id`) ON DELETE CASCADE ON UPDATE CASCADE;

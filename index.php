@@ -121,10 +121,15 @@
                     $query_res = $conn->query($fetch_res); 
                      while($services = $query_res->fetch_assoc())
                     {
+                        if ($services['image']=== ''){
+                            $imageURL =  "design/assets/img/logo.jpeg";
+                        } else{
+                            $imageURL = 'admin/casketimage/'.$services['image'];
+                        }
                     ?>
                      <div class="col-md-4">
                         <div class="card">
-                            <img class="card-img-top" src="design/assets/img/logo.jpeg" alt="Image">
+                            <img class="card-img-top" src="<?php echo $imageURL ?>" alt="Image">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $services['casket_type']; ?></h5>
                                 <p class="card-text"><b>Service Type:  </b> <?php echo $services['service']; ?></p>

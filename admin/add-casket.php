@@ -111,7 +111,7 @@
                             Add Casket
                         </div>
                         <div class="panel-body">
-                            <form name="add_casket" id="add_casket" action="add-casket-action.php" method="POST">
+                            <form name="add_casket" id="add_casket" action="add-casket-action.php" method="POST" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group fieldGroup">
@@ -121,6 +121,7 @@
                                                         <th>Package Type</th>
                                                         <th>Casket Type</th>
                                                         <th>Amount</th>
+                                                        <th>Images</th>
                                                         <th>Add More</th>
                                                     </thead>
                                                     <tbody>
@@ -140,6 +141,7 @@
                                                             </td>
                                                             <td><input type="text" name="casket[]" class="form-control" placeholder="Enter here..."/></td>
                                                             <td><input type="text" name="amount[]" class="form-control" placeholder="Enter here..."/></td>
+                                                            <td><input type="file" class="form-control" name="casket-image" aria-describedby="inputGroupFileAddon04" aria-label="Upload"></td>
                                                             <td><a href="javascript:void(0)" class="btn btn-primary addMore"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
                                                         </tr>
                                                     </tbody>

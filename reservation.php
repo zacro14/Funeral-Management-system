@@ -56,9 +56,9 @@
                                         if($row['reservation_status'] === 'APPROVED'){
                                             $status =  '<span class="badge rounded-pill bg-success pull-left">APPROVE</span>';
                                         } elseif($row['reservation_status'] === 'PENDING'){
-                                            $status = '<span class="badge rounded-pill bg-danger pull-left">PENDING</span>';
+                                            $status = '<span class="badge rounded-pill bg-warning pull-left">PENDING</span>';
                                         }else{
-                                            $status = '<span class="badge rounded-pill bg-warning pull-left">CANCELED</span>';   
+                                            $status = '<span class="badge rounded-pill bg-danger pull-left">CANCELED</span>';   
                                         }
                                     ?>
                                     

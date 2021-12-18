@@ -1,14 +1,20 @@
 <?php
-    require_once 'includes/session.php';
+    include('includes/session.php') ;
+    include('includes/db-connection.php');
 
-    if(isset($_POST['id']))
-    {
-        $id = $_POST['id'];
-
-        $fetch_work = "SELECT * FROM work_type WHERE work_type_id = '".$id."'";
+        $fetch_work = "SELECT *  FROM work_schedule
+                        INNER JOIN branches ON work_schedule.branch_id = branches.branch_id
+                        INNER JOIN employee ON work_schedule.employee_id = employee.employee_id";
+        
         $query = $conn->query($fetch_work);
-        $row_work = $query->fetch_assoc();
-
-        echo json_encode($row_work);
-    }
+        
+        while($record = $query->fetch_assoc()) {
+            $data[] =  array(
+                'id'    => $record['work_schedule_id'],
+                'title' => $record['employee_fname']." ".$record['employee_mname']." ".$record['employee_lname'] ,
+                'start' => $record['date']." ".$record['time'],
+            );
+        };
+        header('Content-Type: application/json');
+        echo json_encode($data);
 ?>

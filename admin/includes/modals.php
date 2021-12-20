@@ -25,13 +25,13 @@
 </div>
 
 
-
+<!-- Modals Payment -->
 <div class="modal fade" id="edit-payment">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h5 class="modal-title">EDIT - <b><span class="name"></span></b></h5>
+                <h5 class="modal-title text-capitalize">EDIT - <b><span class="name"></span></b></h5>
             </div>
             <div class="modal-body">
                 <form action="edit-payment.php" method="POST">
@@ -39,13 +39,16 @@
                     <input type="hidden" class="total-amount" name="total-amount">
                     <input type="hidden" class="balance" name="balance">
                     <div class="row">
-                        <div class="col-md-12">
-                            <h5 class="modal-title">Amount to be paid - <b><span class="total-amount"></span></b></h5>
+                        <div class="col-md-4">
+                            <h5 class="modal-title">Total  Amount: <b><span class="total-amount"></span></b></h5>
+                        </div>
+                        <div class="col-md-4">
+                                <p> Balance: <b><span class="balance" name="balance"></span></b> </p>
                         </div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Enter Amount</label>
                                 <input type="number" class="form-control" name="amount" value=""  placeholder="Enter here..." required/>

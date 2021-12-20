@@ -8,6 +8,8 @@
         $quantity = $_POST['quantity'];
         $service_id = $_POST['service'];
 
+        
+
         if(!empty($casket))
         {
             for($i=0; $i<count($casket); $i++)
@@ -28,7 +30,6 @@
 
                     if($rows['casket_type'] === $casket_type)
                     {
-                       
                             $_SESSION['add-casket-success'] = 'Successfully added.';
                        
                     }

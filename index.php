@@ -197,17 +197,17 @@
         <?php include 'includes/footer.php' ?>
        
         <?php include 'includes/scripts.php' ?>
-        <script>
-
-$(function(){
-   
-   $('.view').click(function(e)
-   {
-       e.preventDefault();
-       $('#view').modal('show');
-       var id = $(this).data('id');
-   });
-});
-        </script>
+        
+<script>
+    $(function(){
+    
+    $('.view').click(function(e)
+    {
+        e.preventDefault();
+        $('#view').modal('show');
+        var id = $(this).data('id');
+    });
+    });
+</script>
     </body>
 </html>

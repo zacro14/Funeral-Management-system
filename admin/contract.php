@@ -141,8 +141,8 @@
                                                     <td>
                                                         <div class="btn-group btn-group-sm">
                                                             <button class="view btn btn-success btn-sm" data-id="<?php echo $row_contract['contract_unique_id']; ?>"><i class="fa fa-eye"></i> </button>
-                                                            <!--
-                                                            <a href="generate-contract.php?id=<?php echo $row_contract['contract_unique_id'] ?>" target="_blank" class="btn btn-sm  btn-primary" ><i class="fa fa-print fa-fw"></i></a> -->
+                                                           
+                                                            <a href="generate-contract.php?id=<?php echo $row_contract['contract_unique_id'] ?>" target="_blank" class="btn btn-sm  btn-primary" ><i class="fa fa-print fa-fw"></i></a>
 														</div>
                                                     </td>
                                                 </tr>
@@ -200,6 +200,7 @@ function ViewContract(id){
             $('.balance').html(response.balance);
             $('.chapel').html(response.chapel_name);
             $('.address').html(response.address);
+            document.getElementById("contract-code").value = response.contract_unique_id;
         }
     });
 }

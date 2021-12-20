@@ -1,20 +1,5 @@
 <?php include "includes/db-connection.php" ?>
 
-<?php   
-
-    // $fetch_contract = "SELECT *
-    // FROM (((((contract
-    // INNER JOIN client ON contract.client_id = client.client_id)
-    // INNER JOIN casket ON contract.casket_id = casket.casket_id)
-    // INNER JOIN service ON contract.service_id = service.service_id)
-    // INNER JOIN deceased ON contract.deceased_id = deceased.deceased_id)
-    // INNER JOIN payments ON contract.payment_id = payments.payment_id)
-    // WHERE contract.client_id = 18";
-    // $query_payments = $conn->query($fetch_contract);
-    // $payment = $query_payments->fetch_assoc();
-?>
-
-
 <!-- VIEW CONTRACT MODAL -->
 <div class="modal fade" id="view">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -24,6 +9,7 @@
                 <h5 class="modal-title text-info"><b><span class="contract"></span></b></h5>
             </div>
             <div class="modal-body">
+                <form action="print-contract.php" method="GET" > 
                 <div class="row">
                     <div class="col-md-12">
                         <h3 class="text-center"><b>FUNERARIA STA. RITA DE CASIA</b></h3>
@@ -33,6 +19,7 @@
                 <br>
                 <div class="row">
                     <div class="col-md-6">
+                        <input type ="hidden" value="" id="contract-code" name="contract-code">
                         <b>Contract Code: </b><span class="contract"></span>
                     </div>
                     <div class="col-md-6">
@@ -78,9 +65,10 @@
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

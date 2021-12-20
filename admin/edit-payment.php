@@ -9,7 +9,9 @@
 
         $status = $amount == $balance ? 'FULLY PAID' : 'NOT FULLY PAID';
 
-            $sql = "UPDATE payments SET payment_amount = payment_amount + '$amount', balance = balance - '$amount', status = '$status' WHERE payment_id = '$id'";
+            $sql = "UPDATE payments SET 
+					payment_amount = payment_amount + '$amount', balance = balance - '$amount', 
+					status = '$status' WHERE payment_id = '$id'";
             if($conn->query($sql)){
                 $_SESSION['edit-success'] = 'payment update successfull';
             }

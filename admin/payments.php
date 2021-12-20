@@ -130,6 +130,8 @@
                                                             INNER JOIN client ON client.client_id = payments.client_id 
                                                             INNER JOIN casket ON casket.casket_id = payments.casket_id
                                                             INNER JOIN branches ON branches.branch_id = payments.branch_id";
+
+                                            
                     
                                             $query_payments = $conn->query($fetch_payment);
                                             $no = 1;
@@ -137,12 +139,12 @@
                                              { $status = ($row_payments['status'] == 'FULLY PAID') ? '<span class="label label-success pull-left">FULLY PAID</span>':'<span class="label label-warning pull-left">NOT FULLY PAID</span>';?>      
                                                 <tr>
                                                     <td><?php echo $no;?></td>
-                                                    <td><?php echo $row_payments['client_firstname']. ' ' . $row_payments['client_middlename']. ' ' . $row_payments['client_lastname'];?></td>
-                                                    <td><?php echo $row_payments['amount'] ?></td>
-                                                    <td><?php echo $row_payments['payment_amount']; ?></td>
-                                                    <td><?php echo $row_payments['balance'];?> </td>
+                                                    <td class="text-capitalize"><?php echo $row_payments['client_firstname']. ' ' . $row_payments['client_middlename']. ' ' . $row_payments['client_lastname'];?></td>
+                                                    <td>&#8369; <?php echo number_format($row_payments['amount'], 2) ?></td>
+                                                    <td>&#8369; <?php echo number_format($row_payments['payment_amount'], 2); ?></td>
+                                                    <td>&#8369; <?php echo $row_payments['balance'];?> </td>
                                                     <td><?php echo $status;?> </td>
-                                                    <td><?php echo $row_payments['contract_unique_id'];?> <button class="view btn btn-secondary btn-sm" data-id="<?php echo $row_payments['contract_unique_id']; ?>"><i class="fa fa-eye"></i> View Contract Details</button></td>
+                                                    <td><button class="view btn btn-secondary btn-sm" data-id="<?php echo $row_payments['contract_unique_id']; ?>"><i class="fa fa-eye"></i> View Contract Details</button></td>
                                                     <td>
 														<div class="btn-group btn-group-sm">
                                                         
@@ -226,8 +228,15 @@ function fetchData(id){
             $('.name').html(response.client_firstname+' '+response.client_middlename+' '+response.client_lastname);
             $('.payment-id').val(response.payment_id);
             $('.total-amount').val(response.amount);
-            $('.total-amount').html(response.amount);
+            
             $('.balance').val(response.balance);
+           
+            const formatNumber = (number) => {
+                return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'PHP' }).format(number);
+            }
+            //const balance  = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'PHP' }).format(response.balance);
+            $('.balance').html(formatNumber(response.balance));
+            $('.total-amount').html(formatNumber(response.amount));
         }
     });
 }

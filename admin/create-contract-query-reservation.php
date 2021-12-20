@@ -3,6 +3,7 @@
 
     if(isset($_POST['btn-create-contract']))
     {
+        //client 
         $client = $_POST['client'];
         $branch = $_POST['branch'];
         $relation = $_POST['relation'];
@@ -57,7 +58,7 @@
         $contract_uid = 'CNTRCT'.$Y.substr(str_shuffle($numbers), 0,5);
 
         $sql_contract = "INSERT INTO contract (contract_unique_id, relation_to_deceased, other_charges, amount, date,address,  client_id, service_id, deceased_id, casket_id, branch_id, chapel_id) 
-                            VALUES ('$contract_uid','$relation','$charges','$amount', Now(),$client_address,
+                            VALUES ('$contract_uid','$relation','$charges','$amount', Now(),'$client_address',
                             (SELECT client_id FROM client WHERE client_id = '$client'),
                             (SELECT service_id FROM service WHERE service_id = '$service'),
                             (SELECT deceased_id FROM deceased WHERE deceased_id = '$deceased'), 
@@ -80,7 +81,7 @@
                             branch_id = (SELECT branch_id FROM branches WHERE branch_id = '$branch')
                             WHERE deceased_id = '".$deceased."'";
 
-        $sql_casket = "UPDATE casket_qty SET 
+        $sql_casket =  "UPDATE casket_qty SET 
                             quantity = (SELECT quantity FROM casket_qty WHERE casket_id = '$casket') - 1
                             WHERE casket_id = '".$casket."' AND branch_id = '".$branch."'";
 

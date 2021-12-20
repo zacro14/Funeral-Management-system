@@ -235,14 +235,48 @@
     $pdf->CellFitScale(87, 8,'Deceased Details',1,0,'C');
 
     $pdf->Ln();
-    $fetch_con = "SELECT * FROM contract LEFT JOIN client ON contract.client_id = client.client_id LEFT JOIN service ON contract.service_id = service.service_id LEFT JOIN deceased ON deceased.deceased_id = contract.deceased_id LEFT JOIN casket ON casket.casket_id = contract.casket_id LEFT JOIN payments ON payments.contract_id = contract.contract_unique_id WHERE contract_unique_id = '".$id."'";
+    $fetch_con = "SELECT * FROM contract 
+                LEFT JOIN client ON contract.client_id = client.client_id 
+                LEFT JOIN service ON contract.service_id = service.service_id 
+                LEFT JOIN deceased ON deceased.deceased_id = contract.deceased_id 
+                LEFT JOIN casket ON casket.casket_id = contract.casket_id 
+                LEFT JOIN payments ON payments.contract_id = contract.contract_unique_id
+                LEFT JOIN chapel ON contract.chapel_id = chapel.chapel_id 
+                WHERE contract_unique_id = '".$id."'";
     $query_con = $conn->query($fetch_con); 
     $numeric_no = 1;
     while($row = $query_con->fetch_assoc())
     {   
+        //client
+      $clientFirstname =  ucwords($row['client_firstname']);
+      $clientLastname =  ucwords($row['client_lastname']);
+      $clientMiddlename =  ucwords($row['client_middlename']);
+
+      //deceased details
+      $deceasedFirstname = ucwords($row['deceased_fname']);
+      $deceasedMiddlename = ucwords($row['deceased_mname']);
+      $deceasedLastname = ucwords($row['deceased_lname']);
+
+      //relation to deceased
+      $relationTodeceased = ucwords($row['relation_to_deceased']);
+
+      //religion
+      $religion = ucwords($row['religion']);
+
+      //casket amount
+      $casketAmount = number_format($row['amount'], 2);
+
+      //balance
+      $balance = number_format($row['balance'], 2);
+
+      //partial payment
+      $payment = number_format($row['payment_amount'], 2);
+
+      $chapel = $row['chapel_name'];
+
         $pdf->SetFont('helvetica','',10);
-        $pdf->CellFitScale(87, 6, 'Name: '. $row['client_firstname'].' '.$row['client_middlename'].' '.$row['client_lastname'], 1, 0,"L");
-        $pdf->CellFitScale(87, 6, 'Name: '.$row['deceased_fname'].' '.$row['deceased_mname'].' '.$row['deceased_lname'], 1, 0,"L");
+        $pdf->CellFitScale(87, 6, 'Name: '.$clientFirstname.' '.$clientMiddlename.' '.$clientLastname, 1, 0,"L");
+        $pdf->CellFitScale(87, 6, 'Name: '.$deceasedFirstname.' '.$deceasedMiddlename.' '.$deceasedLastname, 1, 0,"L");
         $pdf->Ln();
         $pdf->CellFitScale(87, 6, 'Address: ', 1, 0,"L");
         $pdf->CellFitScale(87, 6, 'Born: '. date('M d, Y', strtotime($row['date_of_birth'])),1, 0,"L");
@@ -253,8 +287,8 @@
         $pdf->CellFitScale(87, 6, 'Contact No. '.$row['client_phone'], 1, 0,"L");
         $pdf->CellFitScale(87, 6, 'Died: '. date('M d, Y', strtotime($row['date_died'])),1, 0,"L");
         $pdf->Ln();
-        $pdf->CellFitScale(87, 6, 'Relation to Deceased:  '.$row['relation_to_deceased'], 1, 0,"L");
-        $pdf->CellFitScale(87, 6, 'Religion: '.$row['religion'],1, 0,"L");
+        $pdf->CellFitScale(87, 6, 'Relation to Deceased:  '.$relationTodeceased, 1, 0,"L");
+        $pdf->CellFitScale(87, 6, 'Religion: '.$religion,1, 0,"L");
         $pdf->Ln();
         $pdf->Ln();
         $pdf->CellFitScale(60, 6, 'Type of Service:', 1, 0,"L");
@@ -267,7 +301,7 @@
         $pdf->CellFitScale(114, 6, ' ',1, 0,"L");
         $pdf->Ln();
         $pdf->CellFitScale(60, 6, 'Chapel Viewing:', 1, 0,"L");
-        $pdf->CellFitScale(114, 6, ' ',1, 0,"L");
+        $pdf->CellFitScale(114, 6, $chapel ,1, 0,"L");
         $pdf->Ln();
         $pdf->CellFitScale(60, 6, 'Transport of body/remains:', 1, 0,"L");
         $pdf->CellFitScale(114, 6, ' ',1, 0,"L");
@@ -282,20 +316,20 @@
         $pdf->CellFitScale(114, 6, ' ',1, 0,"L");
         $pdf->Ln();
         $pdf->CellFitScale(60, 6, 'Total Amount:', 1, 0,"L");
-        $pdf->CellFitScale(114, 6, $row['amount'],1, 0,"L");
+        $pdf->CellFitScale(114, 6, $casketAmount,1, 0,"L");
         $pdf->Ln();
         $pdf->CellFitScale(60, 6, ' ', 1, 0,"L");
         $pdf->CellFitScale(114, 6, ' ',1, 0,"L");
         $pdf->Ln();
         $pdf->CellFitScale(60, 6, 'Partial Payment:', 1, 0,"L");
-        $pdf->CellFitScale(114, 6, $row['payment_amount'],1, 0,"L");
+        $pdf->CellFitScale(114, 6, $payment,1, 0,"L");
         $pdf->Ln();
         $pdf->CellFitScale(60, 6, 'Balance:', 1, 0,"L");
-        $pdf->CellFitScale(114, 6, $row['balance'],1, 0,"L");
+        $pdf->CellFitScale(114, 6, $balance,1, 0,"L");
         $pdf->Ln();
 
         
-        $pdf->WriteHTML('                I/We hereby agree and bind myself/ourselves to the above terms and conditions and promise to pay the balance of '. $row['amount'].' on all overdue accounts and an additional of fifteen percent (15%) of the amount due shall be charged for attorney`s fee and cost suit in case of litigation. Paties submit themselves to the jurisdiction of the court of any legal action arising out of this transaction.');
+        $pdf->WriteHTML('                I/We hereby agree and bind myself/ourselves to the above terms and conditions and promise to pay the balance of '.$casketAmount.' on all overdue accounts and an additional of fifteen percent (15%) of the amount due shall be charged for attorney`s fee and cost suit in case of litigation. Parties submit themselves to the jurisdiction of the court of any legal action arising out of this transaction.');
         $pdf->Ln();$pdf->Ln();$pdf->Ln();$pdf->Ln();
 
         $pdf->SetFont('helvetica','i',10);
@@ -304,7 +338,7 @@
         $pdf->Ln();$pdf->Ln();$pdf->Ln();
 
         $pdf->SetFont('helvetica','',11);
-        $pdf->CellFitScale(58, 8, $row['client_firstname'].' '.$row['client_middlename'].' '.$row['client_lastname'], 0, 0,"C");
+        $pdf->CellFitScale(58, 8, $clientFirstname.' '.$clientMiddlename.' '.$clientLastname, 0, 0,"C");
         $pdf->CellFitScale(58, 8, ' ', 0, 0,"l");
         $pdf->CellFitScale(58, 8, 'SUSAN CASTILLA-ALBA', 0, 0,"C");
 

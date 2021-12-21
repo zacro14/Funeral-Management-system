@@ -144,7 +144,6 @@
                                         <th>Reservation Date</th>
                                         <th>Reservation Branch</th>
                                         <th>Reservation Status</th>
-                                        <th class="text-center">Action</th>
                                     </thead>
                                     <tbody>
                                         <?php
@@ -172,7 +171,7 @@
                                                     <td><?php echo date('M d, Y', strtotime($row_res['reservation_date']));?></td>
                                                     <td><?php echo $row_res['branch_name'];?></td>
                                                     <td class="text-center"><?php echo $status;?></td>
-                                                    <td class ="text-center">
+                                                    <!-- <td class ="text-center">
 														<div class="btn-group btn-group-sm">
                                                             <?php
                                                                 if($row_res['reservation_status'] == 'APPROVED')
@@ -189,7 +188,7 @@
                                                             <!-- <a href="cancel-reservation.php" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="CANCEL RESERVATION"><i class="fa fa-times fa-fw"></i></a> -->
                                                             <!-- <a href="delete-reservation.php" class="btn btn-sm btn-danger"><i class="fa fa-trash fa-fw"></i></a>'; -->
 														</div>
-													</td>
+													</td> 
                                                 </tr>
 
 

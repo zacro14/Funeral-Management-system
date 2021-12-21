@@ -1,4 +1,4 @@
-
+<!-- MOODAL WORK -->
 <div class="modal fade" id="delete-work">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -12,7 +12,6 @@
             		<input type="hidden" class="work-id" name="work_id">
             		<div class="text-center">
 	                	<b><h3 class="work"></h3></b>
-	                	
 	            	</div>
           	</div>
           	<div class="modal-footer">

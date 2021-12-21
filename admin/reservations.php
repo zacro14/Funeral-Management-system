@@ -100,7 +100,7 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <select name="status" id="status" class="form-control">
-                             <option value="" disabled selected>-Filter by Status-</option>
+                            <option value="" disabled selected>-Filter by Status-</option>
                             <option value="APPROVED" >APPROVED</option>
                             <option value="PENDING" >PENDING</option>
                             <option value="CANCELED" >CANCELED</option>
@@ -144,24 +144,25 @@
                                         <th>Reservation Date</th>
                                         <th>Reservation Branch</th>
                                         <th>Reservation Status</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </thead>
                                     <tbody>
                                         <?php
                                             $fetch_res = "SELECT * FROM reservation 
                                             LEFT JOIN client ON client.client_id = reservation.client_id 
-                                            LEFT JOIN branches ON branches.branch_id = reservation.branch_id  
-                                            ORDER BY reservation.reservation_date, reservation.reservation_status = 'PENDING' ";
+                                            LEFT JOIN branches ON branches.branch_id = reservation.branch_id
+                                            WHERE reservation_status = 'PENDING'
+                                            ORDER BY reservation.reservation_date AND reservation.reservation_status ='PENDING' DESC";
                                             $query_res = $conn->query($fetch_res);
                                             $no = 1;
                                             while($row_res = $query_res->fetch_assoc())
                                             {  
                                                 if($row_res['reservation_status'] === 'APPROVED'){
-                                                    $status = '<span class="label label-success pull-left">APPROVED</span>';
+                                                    $status = '<span class="label label-success">APPROVED</span>';
                                                 } elseif( $row_res['reservation_status'] === 'CANCELED'){
-                                                    $status = '<span class="label label-danger pull-left">CANCELED</span>';
+                                                    $status = '<span class="label label-danger">CANCELED</span>';
                                                 } else{
-                                                    $status = '<span class="label label-warning pull-left">PENDING</span>';
+                                                    $status = '<span class="label label-warning">PENDING</span>';
                                                 }
                                                 ?>      
                                                 <tr>
@@ -170,23 +171,23 @@
                                                     <td><a class="text-capitalize" href="view-client.php?client=<?php echo $row_res['client_id'];?>"><?php echo $row_res['client_firstname']. ' ' . $row_res['client_middlename']. ' ' . $row_res['client_lastname'];?></td>
                                                     <td><?php echo date('M d, Y', strtotime($row_res['reservation_date']));?></td>
                                                     <td><?php echo $row_res['branch_name'];?></td>
-                                                    <td><?php echo $status;?></td>
-                                                    <td>
+                                                    <td class="text-center"><?php echo $status;?></td>
+                                                    <td class ="text-center">
 														<div class="btn-group btn-group-sm">
                                                             <?php
                                                                 if($row_res['reservation_status'] == 'APPROVED')
                                                                 {
-                                                                    echo '<a href="view-reservation.php?reservation='.$row_res['reservation_code'].'" class="btn btn-sm  btn-success" data-toggle="tooltip" data-placement="top" title="VIEW DETAILS"><i class="fa fa-eye fa-fw"></i></a>
+                                                                    echo '<a href="view-reservation.php?reservation='.$row_res['reservation_code'].'" class="btn btn-sm  btn-success" data-toggle="tooltip" data-placement="top" title="VIEW DETAILS"><i class="fa fa-eye fa-fw"></i></a>';
                                                                     
-                                                                    <a href="delete-reservation.php" class="btn btn-sm btn-danger"><i class="fa fa-trash fa-fw"></i></a>';
                                                                 }
                                                                 else
                                                                 {
-                                                                    echo '<a href="approve-reservation.php?resno='. $row_res['reservation_code']. '" class="btn btn-sm  btn-info" data-toggle="tooltip" data-placement="top" title="APPROVE RESERVATION"><i class="fa fa-check fa-fw"></i></a>
+                                                                    echo '<a href="approve-reservation.php?resno='. $row_res['reservation_code']. '" class="btn btn-sm  btn-info" data-toggle="tooltip" data-placement="top" title="APPROVE RESERVATION"><i class="fa fa-check fa-fw"></i></a>';
                                                                     
-                                                                    <a href="cancel-reservation.php" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="CANCEL RESERVATION"><i class="fa fa-times fa-fw"></i></a>';
                                                                 }
                                                             ?>
+                                                            <!-- <a href="cancel-reservation.php" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="CANCEL RESERVATION"><i class="fa fa-times fa-fw"></i></a> -->
+                                                            <!-- <a href="delete-reservation.php" class="btn btn-sm btn-danger"><i class="fa fa-trash fa-fw"></i></a>'; -->
 														</div>
 													</td>
                                                 </tr>

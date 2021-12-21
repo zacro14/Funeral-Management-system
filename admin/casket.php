@@ -119,18 +119,29 @@
                                         <th>Casket Type</th>
                                         <th>Amount</th>
                                         <th>Package Type</th>
+                                        <th>Image</th>
                                         <th></th>
                                     </thead>
                                         <?php
                                             $select_casket = "SELECT * FROM casket LEFT JOIN service ON service.service_id = casket.service_id";
                                             $query = $conn->query($select_casket);
                                             $no=1;
-                                            while($row = $query->fetch_assoc()) { ?>
+                                            while($row = $query->fetch_assoc()) { 
+                                                $casketImage= $row['image'];
+                                                $casketType = $row['casket_type'];
+                                                if($casketImage === ''){
+                                                    $image = "casketimage/logo.jpeg";
+                                                }else{
+                                                    $image = "casketimage/".$casketImage;
+                                                }
+                                                
+                                                ?>
                                                 <tr>
                                                     <td><?php echo $no; ?></td>
-                                                    <td><?php echo $row['casket_type']; ?></td>
-                                                    <td><?php echo $row['amount']; ?></td>
+                                                    <td><?php echo $casketType; ?></td>
+                                                    <td><?php echo number_format($row['amount'], 2); ?></td>
                                                     <td><?php echo $row['service']; ?></td>
+                                                    <td><img src="<?php echo $image ?>" class=" img-thumbnail" alt="..." style="width: 100px; height: 100px"></td>
                                                     <td>
                                                         <div class="btn-group btn-group-sm">
                                                             

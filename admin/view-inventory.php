@@ -55,11 +55,8 @@
                                                     <td><?php echo $row['quantity']; ?> 
                                                     <td><button class="add-quantity btn btn-primary btn-sm pull-center" data-id="<?php echo $row['casket_qty_id']; ?>"><i class="fa fa-edit"></i> </button></td>
                                                 </tr>
-                                             <?php $no++; }
-                                        ?>
-                                    <tbody>
-                                        
-                                    </tbody>
+                                             <?php $no++; }?>
+                                    
                                 </table>
                             </div>
                         </div>

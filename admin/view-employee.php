@@ -98,10 +98,12 @@
                     <h3 class="page-header">Employee</h3>
                 </div>
             </div>
-
+                    
             <div class="row">
                 <div class="col-lg-12">
-                    <?php include 'includes/client-alert-message.php' ?>
+                    <?php include 'includes/client-alert-message.php';
+                            include ('includes/employee-alert-message.php');
+                    ?>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Employee Data
@@ -128,8 +130,8 @@
                                                     <td><?php echo $row_emp['contact'];?></td>
                                                     <td>
 														<div class="btn-group btn-group-sm">
-                                                            <button class="edit-client btn btn-primary btn-sm" data-id="<?php echo $row_emp['employee_id']; ?>"><i class="fa fa-edit"></i> </button>
-                                                            <button class="delete  btn btn-danger btn-sm" data-id="<?php echo $row_emp['employee_id']; ?>"><i class="fa fa-trash"></i> </button>
+                                                            <button class="edit-employee btn btn-primary btn-sm" data-id="<?php echo $row_emp['employee_id']; ?>"><i class="fa fa-edit"></i> </button>
+                                                            <button class="delete-employee  btn btn-danger btn-sm" data-id="<?php echo $row_emp['employee_id']; ?>"><i class="fa fa-trash"></i> </button>
 														</div>
 													</td>
                                                 </tr>
@@ -148,6 +150,59 @@
     </div>
 </div>
 
-<?php include 'includes/scripts.php' ?>
+<?php 
+    include ('includes/modal-employee.php');
+    include 'includes/scripts.php';
+?>
+
+<script>
+
+$('.edit-employee').click(function(e)
+    {
+        e.preventDefault();
+        $('#edit-employee').modal('show');
+        var id = $(this).data('id');
+        fetchData(id);
+    });
+
+
+$('.delete-employee').click(function(e)
+    {
+        e.preventDefault();
+        $('#delete-employee').modal('show');
+        var id = $(this).data('id');
+        fetchData(id);
+    });
+
+
+function fetchData(id){
+    $.ajax({
+        type: 'POST',
+        url: 'fetch-employee.php',
+        data: {id:id},
+        dataType: 'json',
+        success: function(response){ 
+            console.log(response); 
+            $('.employee-name').html(response.employee_fname+' '+ response.employee_mname+' '+ response.employee_lname);
+            $('#employee-firstname').val(response.employee_fname);
+            $('#employee-middlename').val(response.employee_mname);
+            $('#employee-lastname').val(response.employee_lname);
+            $('#employee-phone').val(response.contact);
+            $('#employee-id').val(response.employee_id);
+            $('.branch-id').val(response.branch_id);
+            
+        }
+    });
+}
+</script>
+
+<script>
+    window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 3000);
+</script>
+
 </body>
 </html>

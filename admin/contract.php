@@ -135,8 +135,8 @@
                                                 <tr>
                                                     <td><?php echo $no;?></td>
                                                     <td><?php echo $row_contract['contract_unique_id'];?></td>
-                                                    <td><?php echo $row_contract['client_firstname'].' '.$row_contract['client_middlename'].' '.$row_contract['client_lastname'];?></td>
-                                                    <td><?php echo $row_contract['deceased_fname'].' '.$row_contract['deceased_mname'].' '.$row_contract['deceased_lname'];?></td>
+                                                    <td class="text-capitalize"><?php echo $row_contract['client_firstname'].' '.$row_contract['client_middlename'].' '.$row_contract['client_lastname'];?></td>
+                                                    <td class="text-capitalize"><?php echo $row_contract['deceased_fname'].' '.$row_contract['deceased_mname'].' '.$row_contract['deceased_lname'];?></td>
                                                     <td><?php echo $row_contract['service'];?></td>
                                                     <td>
                                                         <div class="btn-group btn-group-sm">

@@ -13,7 +13,7 @@
 					payment_amount = payment_amount + '$amount', balance = balance - '$amount', 
 					status = '$status' WHERE payment_id = '$id'";
             if($conn->query($sql)){
-                $_SESSION['edit-success'] = 'payment update successfull';
+                $_SESSION['edit-success'] = 'PAYMENT SUCCESSFUL';
             }
             else{
                 $_SESSION['edit-error'] = $conn->error;

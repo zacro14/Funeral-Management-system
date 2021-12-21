@@ -6,7 +6,10 @@
     {
         $status = $_POST['status'];
     
-        $fetch_res = "SELECT * FROM reservation LEFT JOIN client ON client.client_id = reservation.client_id LEFT JOIN branches ON branches.branch_id = reservation.branch_id WHERE reservation.reservation_status = '".$status."' AND reservation.branch_id = '".$user['branch_id']."' ORDER BY reservation.reservation_date";
+        $fetch_res = "SELECT * FROM reservation 
+                        LEFT JOIN client ON client.client_id = reservation.client_id 
+                        LEFT JOIN branches ON branches.branch_id = reservation.branch_id 
+                        WHERE reservation.reservation_status = '".$status."' AND reservation.branch_id = '".$user['branch_id']."' ORDER BY reservation.reservation_date";
         $query_res = $conn->query($fetch_res);
         $count = $query_res->num_rows;
         $no=1;
@@ -61,7 +64,7 @@
                                 }
                                 else{
                                     echo '<a href="create-contract.php" class="btn btn-sm  btn-info" data-toggle="tooltip" data-placement="top" title="CREATE CONTRACT"><i class="fa fa-file-text fa-fw"></i></a>
-                                    <a href="create-contract.php" class="btn btn-sm btn-outline btn-primary" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="fa fa-edit fa-fw"></i></a>';
+                                    <a href="view-reservation.php?reservation='.$rows['reservation_code'].'" class="btn btn-sm btn-outline btn-primary" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="fa fa-edit fa-fw"></i></a>';
                                 }
                             
                             ?>

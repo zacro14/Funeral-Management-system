@@ -160,11 +160,11 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <?php
-                                        $fetch = "SELECT * FROM payments WHERE status = 'NOT FULLY PAID'";
+                                        $fetch = "SELECT * FROM payments ";
                                         $query = $conn->query($fetch);
                                         echo "<div class='huge'>".$query->num_rows."</div>";
                                     ?>
-                                    <div>NOT FULLY PAID</div>
+                                    <div>PAYMENT</div>
                                 </div>
                             </div>
                         </div>
@@ -182,19 +182,19 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-money fa-5x"></i>
+                                    <i class="glyphicon glyphicon-list-alt fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <?php
-                                        $fetch = "SELECT * FROM payments WHERE status = 'FULLY PAID'";
+                                        $fetch = "SELECT * FROM casket";
                                         $query = $conn->query($fetch);
                                         echo "<div class='huge'>".$query->num_rows."</div>";
                                     ?>
-                                    <div>FULLY PAID</div>
+                                    <div>CASKET</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="payments.php">
+                        <a href="casket.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

@@ -27,7 +27,6 @@
             <th>Reservation Date</th>
             <th>Reservation Branch</th>
             <th>Reservation Status</th>
-            <th>Action</th>
         <?php
             }
             else
@@ -52,8 +51,8 @@
                     <td><?php echo $rows['client_firstname']. ' ' . $rows['client_middlename']. ' ' . $rows['client_lastname'];?></td>
                     <td><?php echo date('M d, Y', strtotime($rows['reservation_date']));?></td>
                     <td><?php echo $rows['branch_name'];?></td>
-                    <td><?php echo $status;?></td>
-                    <td>
+                    <td class ="text-center"><?php echo $status;?></td>
+                    <!-- <td>
 						<div class="btn-group btn-group-sm">
                             <?php
                                 if($rows['reservation_status'] == 'APPROVED')
@@ -69,7 +68,7 @@
                             
                             ?>
 						</div>
-					</td>
+					</td> -->
                 </tr>
                 <?php $no++; } ?>
         </tbody>

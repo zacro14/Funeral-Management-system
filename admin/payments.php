@@ -142,7 +142,7 @@
                                                     <td class="text-capitalize"><?php echo $row_payments['client_firstname']. ' ' . $row_payments['client_middlename']. ' ' . $row_payments['client_lastname'];?></td>
                                                     <td>&#8369; <?php echo number_format($row_payments['amount'], 2) ?></td>
                                                     <td>&#8369; <?php echo number_format($row_payments['payment_amount'], 2); ?></td>
-                                                    <td>&#8369; <?php echo $row_payments['balance'];?> </td>
+                                                    <td>&#8369; <?php echo number_format($row_payments['balance'], 2);?> </td>
                                                     <td><?php echo $status;?> </td>
                                                     <td><button class="view btn btn-secondary btn-sm" data-id="<?php echo $row_payments['contract_unique_id']; ?>"><i class="fa fa-eye"></i> View Contract Details</button></td>
                                                     <td>

@@ -125,7 +125,7 @@
                                             $no = 1;
                                             while($row_client = $query_client->fetch_assoc()){ ?>      
                                                 <tr>
-                                                    <td><?php echo $row_client['client_firstname']. ' ' . $row_client['client_middlename']. ' ' . $row_client['client_lastname'];?></td>
+                                                    <td class="text-capitalize"><?php echo $row_client['client_firstname']. ' ' . $row_client['client_middlename']. ' ' . $row_client['client_lastname'];?></td>
                                                     <td><?php echo $row_client['client_email'];?></td>
                                                     <td><?php echo $row_client['client_phone'];?></td>
                                                     <td>
@@ -180,6 +180,9 @@ function fetchData(id){
         success: function(response){   
             $('.client-name').html(response.client_firstname+' '+response.client_middlename+' '+response.client_lastname);
             $('.client-id').val(response.client_id);
+            $('.client-email').html(response.client_email);
+            $('.client-phone').html(response.client_phone);
+            $('.client-datecreated').html(response.client_application_date);
             $('#client-firstname').val(response.client_firstname);
             $('#client-middlename').val(response.client_middlename);
             $('#client-lastname').val(response.client_lastname);

@@ -347,20 +347,35 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title">Are you sure you want to delete?</h4>
+            	<h4 class="modal-title">Are you sure to delete the client?</h4>
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="delete-client.php">
             		<input type="hidden" class="client-id" name="id">
-            		<div class="text-center">
-	                	<b><h3 class="client-name"></h3></b>
-	                	
+            		<div class="row">
+                        <dl class="dl-horizontal col-sm-6">
+                            <dt class="text-capitalize">Client Name</dt>
+                            <dd class="text-capitalize"><span class="client-name"></span></dd>
+                            <dt class="text-capitalize"> email</dt>
+                            <dd><span class="client-email"></span> </dd>
+
+                            <dt class="text-capitalize">phone</dt>
+                            <dd><span class="client-phone"></span></dd>
+
+                            <dt class="text-capitalize">created</dt>
+                            <dd><spam class="client-datecreated"></span></dd>
+                            <small class="text-danger"><i>This will delete the client permanently*</i></small> 
+                        </dl> 
+
 	            	</div>
           	</div>
           	<div class="modal-footer">
+
+               
             	<button type="button" class="btn btn-default btn-flat" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
             	<button type="submit" class="btn btn-danger btn-flat" name="btn-delete-client"><i class="fa fa-trash"></i> Delete</button>
-            	</form>
+            	
+            </form>
           	</div>
         </div>
     </div>

@@ -38,7 +38,7 @@
                                         <th>#</th>
                                         <th>Casket Type</th>
                                         <th>Quantity</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </thead>
                                         <?php
                                             $select_casket =    "SELECT * FROM casket 
@@ -53,7 +53,7 @@
                                                     <td><?php echo $no; ?></td>
                                                     <td><?php echo $row['casket_type']; ?></td>
                                                     <td><?php echo $row['quantity']; ?> 
-                                                    <td><button class="add-quantity btn btn-primary btn-sm pull-center" data-id="<?php echo $row['casket_qty_id']; ?>"><i class="fa fa-edit"></i> </button></td>
+                                                    <td class="text-center"><button class="add-quantity btn btn-primary btn-sm pull-center" data-id="<?php echo $row['casket_qty_id']; ?>"><i class="fa fa-edit"></i> </button></td>
                                                 </tr>
                                              <?php $no++; }?>
                                     

@@ -20,7 +20,7 @@
             <div class="dropdown">
                 <button class="btn btn-custom text-white fw-bold btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-user"></i>
-                <span><?php echo $user['client_firstname'] . ' ' . $user['client_lastname'];?></span>
+                <span class="text-capitalize" ><?php echo $user['client_firstname'] . ' ' . $user['client_lastname'];?></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <li><a href="change-password.php?id=<?php echo $user['client_id'];?>&name=<?php echo $user['client_firstname'];?> " class="dropdown-item dropdown-footer"><i class="fas fa-edit"></i> Change Password </a></li>

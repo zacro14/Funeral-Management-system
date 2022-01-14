@@ -37,8 +37,9 @@
                     <input type="hidden" class="payment-id" name="payment_id">
                     <input type="hidden" class="total-amount" name="total-amount">
                     <input type="hidden" class="balance" name="balance">
-                    <div class="row">
+                    <div class="row align-center">
                         <div class="col-md-4">
+                            <input type = "hidden" name="casket_id" class="total-amount" >
                             <h5 class="modal-title">Total  Amount: <b><span class="total-amount"></span></b></h5>
                         </div>
                         <div class="col-md-4">
@@ -50,7 +51,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Enter Amount</label>
-                                <input type="number" class="form-control" name="amount" value=""  placeholder="Enter here..." required/>
+                                <input  
+                                id="paymentamount" onchange="paymentAmount(this)" 
+                                type="number" class="form-control" name="amount" value=""  
+                                placeholder="0.00" required
+                                min="0"
+                            
+                               
+                                />
                             </div>
                         </div>
                        
@@ -127,7 +135,7 @@
             </div>
             <div class="modal-body">
                 <form action="edit-casket.php" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" class="casket-id" name="casket_id">
+                    <input type="hidden" id="casket-id" class="casket-id" name="casket_id" value="">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

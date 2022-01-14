@@ -139,9 +139,13 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Contact</label>
-                                            <input type="number" class="form-control"
-                                            name="client_contact" value=""  placeholder="Enter here..." required/>
+                                            <label>Contact </label> <small> eg. +63900000000 or 0900000000 *</small>
+                                            <input type="tel" class="form-control"
+                                            name="client_contact" value="" minlength="9" maxlength="14"
+                                            pattern="((^(\+)(\d){12}$)|(^\d{11}$))" title="eg. 0900000000 or +63900000000"
+                                            placeholcer=" eg. +63900000000"
+                                            required
+                                            />
                                         </div>
                                     </div>
                                 </div>

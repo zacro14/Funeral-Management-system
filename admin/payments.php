@@ -98,9 +98,26 @@
             </div>
             
             <br>
+
+<div class="row">
+    <div class="col-md-2">
+            <div class="form-group">
+                <select name="status" id="status" class="form-control">
+                            <!-- <option value="" disabled selected>-Filter by Status-</option> -->
+                           
+                <option value="NOT FULLY PAID" >NOT FULLY PAID</option>
+                <option value="FULLY PAID" >FULLY PAID</option>
+                          
+                </select>
+        </div>
+    </div>
+</div>
+
             <div class="row">
                 <div class="col-lg-12">
                     <?php include 'includes/payment-alert-message.php' ?>
+                   
+                </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             List
@@ -129,7 +146,8 @@
                                                             INNER JOIN contract ON contract.contract_unique_id = payments.contract_id 
                                                             INNER JOIN client ON client.client_id = payments.client_id 
                                                             INNER JOIN casket ON casket.casket_id = payments.casket_id
-                                                            INNER JOIN branches ON branches.branch_id = payments.branch_id";
+                                                            INNER JOIN branches ON branches.branch_id = payments.branch_id
+                                                            WHERE status =  'NOT FULLY PAID' ";
 
                                             
                     
@@ -228,7 +246,6 @@ function fetchData(id){
             $('.name').html(response.client_firstname+' '+response.client_middlename+' '+response.client_lastname);
             $('.payment-id').val(response.payment_id);
             $('.total-amount').val(response.amount);
-            
             $('.balance').val(response.balance);
            
             const formatNumber = (number) => {
@@ -268,6 +285,12 @@ function ViewContract(id){
         }
     });
 }
+
+
+
+function paymentAmount(el) {
+        el.value = parseFloat(el.value).toFixed(2);
+    };
 </script>
 
 <script>
@@ -275,7 +298,7 @@ function ViewContract(id){
     $(".alert").fadeTo(500, 0).slideUp(500, function(){
         $(this).remove(); 
     });
-}, 3000);
+}, 5000);
 </script>
 
 </body>

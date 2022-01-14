@@ -12,7 +12,6 @@
         $target_dir = "casketimage/";
         $target_file = $target_dir. basename($filename);
       
-
 			if(move_uploaded_file($_FILES['file']['tmp_name'], $target_file)){
 
 				$sql = "UPDATE casket 
@@ -20,12 +19,15 @@
 						service_id= (SELECT service_id FROM service WHERE service_id='$service_type')
 						WHERE casket_id = '$id'";
 				if($conn->query($sql)){
-					$_SESSION['edit-casket-success'] = 'Casket update successfull';
+					$_SESSION['edit-casket-success'] = 'Casket update successful';
 				}
 				else{
 					$_SESSION['edit-casket-error'] = $conn->error;
 				}
-		  	}
+		  	}else{
+		
+				$_SESSION['edit-casket-error'] = "Something error on image upload";
+			  }
 	}
 	else{
 		$_SESSION['edit-casket-error'] = 'Select casket to edit first';

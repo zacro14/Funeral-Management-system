@@ -274,11 +274,13 @@
 
       $chapel = $row['chapel_name'];
 
+      $address= $row['address'];
+
         $pdf->SetFont('helvetica','',10);
         $pdf->CellFitScale(87, 6, 'Name: '.$clientFirstname.' '.$clientMiddlename.' '.$clientLastname, 1, 0,"L");
         $pdf->CellFitScale(87, 6, 'Name: '.$deceasedFirstname.' '.$deceasedMiddlename.' '.$deceasedLastname, 1, 0,"L");
         $pdf->Ln();
-        $pdf->CellFitScale(87, 6, 'Address: ', 1, 0,"L");
+        $pdf->CellFitScale(87, 6, 'Address: '.$address, 1, 0,"L");
         $pdf->CellFitScale(87, 6, 'Born: '. date('M d, Y', strtotime($row['date_of_birth'])),1, 0,"L");
         $pdf->Ln();
         $pdf->CellFitScale(87, 6, ' ', 1, 0,"L");

@@ -141,7 +141,7 @@
                                                             </td>
                                                             <td><input type="text" name="casket[]" class="form-control" placeholder="Enter here..."/></td>
                                                             <td><input type="text" name="amount[]" class="form-control" placeholder="Enter here..."/></td>
-                                                            <td><input type="file" class="form-control" name="casket-image" aria-describedby="inputGroupFileAddon04" aria-label="Upload"></td>
+                                                            <td><input type="file" class="form-control" name="file" aria-describedby="inputGroupFileAddon04" aria-label="Upload"></td>
                                                             <td><a href="javascript:void(0)" class="btn btn-primary addMore"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
                                                         </tr>
                                                     </tbody>

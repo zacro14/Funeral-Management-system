@@ -119,14 +119,15 @@
                                         <th>Casket Type</th>
                                         <th>Amount</th>
                                         <th>Package Type</th>
-                                        <th>Image</th>
-                                        <th></th>
+                                        <th class="text-center">Image</th>
+                                        <th>Actions</th>
                                     </thead>
                                         <?php
                                             $select_casket = "SELECT * FROM casket LEFT JOIN service ON service.service_id = casket.service_id";
                                             $query = $conn->query($select_casket);
                                             $no=1;
-                                            while($row = $query->fetch_assoc()) { 
+                                            while($row = $query->fetch_assoc()) {
+
                                                 $casketImage= $row['image'];
                                                 $casketType = $row['casket_type'];
                                                 if($casketImage === ''){
@@ -141,10 +142,9 @@
                                                     <td><?php echo $casketType; ?></td>
                                                     <td><?php echo number_format($row['amount'], 2); ?></td>
                                                     <td><?php echo $row['service']; ?></td>
-                                                    <td><img src="<?php echo $image ?>" class=" img-thumbnail" alt="..." style="width: 100px; height: 100px"></td>
-                                                    <td>
-                                                        <div class="btn-group btn-group-sm">
-                                                            
+                                                    <td class="text-center"><img src="<?php echo $image ?>" class="img-thumbnail" alt="<?php echo $casketType ?>" style="width: 100px; height: 100px"></td>
+                                                    <td  class="text-center">
+                                                        <div class="btn-group btn-group-sm"> 
                                                             <button class="edit-casket btn btn-primary btn-sm" data-id="<?php echo $row['casket_id']; ?>"><i class="fa fa-edit"></i> </button>
                                                             <button class="delete-casket  btn btn-danger btn-sm" data-id="<?php echo $row['casket_id']; ?>"><i class="fa fa-trash"></i> </button>
 														</div>
@@ -210,7 +210,7 @@ $(function(){
         e.preventDefault();
         $('#edit-casket').modal('show');
         var id = $(this).data('id');
-        fetchData(id);
+        fetchCasket(id);
     });
 
     $('.delete-casket').click(function(e)
@@ -226,6 +226,25 @@ function fetchData(id){
     $.ajax({
         type: 'POST',
         url: 'fetch-casket.php',
+        data: {id:id},
+        dataType: 'json',
+        success: function(response){  
+            console.log(response)
+            $('.casket').html(response.casket_type);
+            $('.casket-qty-id').val(response.casket_qty_id);
+            $('.casket-id').val(response.casket_id);
+            $('.package-type').text(response.service);
+            $('#casket').val(response.casket_type);
+            $('#amount').val(response.amount);
+            
+        }
+    });
+}
+
+function fetchCasket(id){
+    $.ajax({
+        type: 'POST',
+        url: 'fetch-casket-amount.php',
         data: {id:id},
         dataType: 'json',
         success: function(response){  

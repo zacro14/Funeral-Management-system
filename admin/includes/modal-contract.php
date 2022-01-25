@@ -51,6 +51,7 @@
                             <table class="table table-bordered">
                                 <tr><td style="width:35%;"><b>Type Of Service: </b></td><td><span class="service"></span></td></tr>
                                 <tr><td style="width:35%;"><b>Casket Type: </b></td><td><span class="casket"><?php echo $payment['casket_type'];?></span></td></tr>
+                                <tr><td style="width:35%;"><b> Amount: </b></td><td><span class="casketAmount"></span></td></tr>
                                 <tr><td style="width:35%;"><b>Chandeliers and Vigil Equip: </b></td><td><span class="chandeliers"></span></td></tr>
                                 <tr><td style="width:35%;"><b>Chapel Viewing: </b></td><td><span class="chapel"></span></td></tr>
                                 <tr><td style="width:35%;"><b>Transport of body/remains: </b></td><td><span class="transport"></span></td></tr>

@@ -99,10 +99,9 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
-                        <select name="status" id="status" class="form-control">
-                            <option value="" disabled selected>-Filter by Status-</option>
-                            <option value="APPROVED" >APPROVED</option>
-                            <option value="PENDING" >PENDING</option>
+                        <select name="status" id="status" class="form-control">                
+                            <option value="PENDING" >PENDING</option>    
+                            <option value="APPROVED" >APPROVED</option>                            
                             <option value="CANCELED" >CANCELED</option>
                         </select>
                     </div>

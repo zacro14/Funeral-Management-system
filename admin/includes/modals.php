@@ -43,7 +43,7 @@
                             <h5 class="modal-title">Total  Amount: <b><span class="total-amount"></span></b></h5>
                         </div>
                         <div class="col-md-4">
-                                <p> Balance: <b><span class="balance" name="balance"></span></b> </p>
+                                <p> Balance: <b><span class="balance"name="balance"></span></b> </p>
                         </div>
                     </div>
                     <br>
@@ -52,12 +52,10 @@
                             <div class="form-group">
                                 <label for="">Enter Amount</label>
                                 <input  
-                                id="paymentamount" onchange="paymentAmount(this)" 
-                                type="number" class="form-control" name="amount" value=""  
-                                placeholder="0.00" required
-                                min="0"
-                            
-                               
+                                id="paymentamount" onkeyup="send(event)" 
+                                inputmode="numeric" class="form-control" name="amount" value="0.00" 
+                                
+                                required                                                                                        
                                 />
                             </div>
                         </div>
@@ -389,6 +387,43 @@
 </div>
 
 
+<!-- System User Modal -->
+
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUser">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Update System User</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="row">   
+                <div class="col-md-4">       
+                    <div class="form-group">
+                        <label for="user-name" class="control-label">User Name:</label>
+                        <input type="text" class="form-control" id="user-name">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="message-text" class="control-label" >Password:</label>
+                        <input class="form-control" id="message-text" type="password" ></input>
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Update User</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- SERVICE MODALS -->
 
 <div class="modal fade" id="delete-service">
@@ -429,14 +464,20 @@
                 <form action="edit-service.php" method="POST">
                     <input type="hidden" class="service-id" name="service_id">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label for="Service">Type of Service</label>
                                 <input type="text" class="form-control" id="service" name="service">
                             </div>
                         </div>
-                        
-                    <br><br><br><br><br>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="Service">Type of Service</label>
+                                <textarea type="text" class="form-control" id="servicedetails" name="servicedetails" required> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                   
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" name="btn-edit-service"><i class="fa fa-check-square-o"></i> UPDATE</button>
                         </form>
@@ -446,6 +487,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 

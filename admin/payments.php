@@ -100,11 +100,9 @@
             <br>
 
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
             <div class="form-group">
-                <select name="status" id="status" class="form-control">
-                            <!-- <option value="" disabled selected>-Filter by Status-</option> -->
-                           
+                <select name="status" id="status" class="form-control">                          
                 <option value="NOT FULLY PAID" >NOT FULLY PAID</option>
                 <option value="FULLY PAID" >FULLY PAID</option>
                           
@@ -137,6 +135,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
+                                        
                                             // $fetch_payment = "SELECT payments.payment_id, payments.payment_amount, payments.balance, payments.status, contract.contract_unique_id, client.client_firstname, client.client_middlename, client.client_lastname, branches.branch_name, branches.branch_address FROM (((payments
                                             //     INNER JOIN client ON payments.client_id = client.client_id)
                                             //     INNER JOIN contract ON payments.payment_id = contract.contract_id)
@@ -147,7 +146,7 @@
                                                             INNER JOIN client ON client.client_id = payments.client_id 
                                                             INNER JOIN casket ON casket.casket_id = payments.casket_id
                                                             INNER JOIN branches ON branches.branch_id = payments.branch_id
-                                                            WHERE status =  'NOT FULLY PAID' ";
+                                                            WHERE status = 'NOT FULLY PAID' ";
 
                                             
                     
@@ -167,8 +166,7 @@
 														<div class="btn-group btn-group-sm">
                                                         
                                                             <button class="edit-payment btn btn-primary btn-sm" data-id="<?php echo $row_payments['payment_id']; ?>"><i class="fa fa-edit"></i> </button>
-                                                            <!--
-                                                            <button class="delete-service  btn btn-danger btn-sm" data-id="<?php echo $row_service['service_id']; ?>"><i class="fa fa-trash"></i> </button> -->
+                                                           
 														</div>
 													</td>
                                                 </tr>
@@ -211,13 +209,35 @@
     </div>
 
 </div>
+
+
 <?php include 'includes/modal-contract.php' ?>
 <?php include 'includes/modals.php' ?>
 <?php include 'includes/scripts.php' ?>
 
+<script src="./js/simple-mask-money.js"></script>
 <script>
+
+
+    $("#status").on('change', function(){
+        var value = $(this).val();
+            //alert(value);
+
+        $.ajax({
+                url: "payment-filter.php",
+                type: "POST",
+                data: "status=" + value,
+                beforeSend:function(){
+                    $(".panel-body").html("<center><img class='' src='img/loader.gif' /></center>");
+                },
+                success:function(data){
+                    
+                    $(".panel-body").html(data);
+                }
+        });
+    });
+
 $(function(){
-   
    $('.view').click(function(e)
    {
        e.preventDefault();
@@ -286,11 +306,34 @@ function ViewContract(id){
     });
 }
 
+/*
+*
+https://github.com/codermarcos/simple-mask-money
+*
+*/
+
+// config
+const options = {
+        allowNegative: false,
+        negativeSignAfter: false,
+        prefix: '',
+        suffix: '',
+        fixed: true,
+        fractionDigits: 2,
+        decimalSeparator: '.',
+        thousandsSeparator: ',',
+        cursor: 'move'
+      };
+
+      let input = SimpleMaskMoney.setMask('#paymentamount', options);
+
+      send = (e) => {
+        if (e.key !== "Enter") return;
+        // This method return value of your input in format number to save in your database
+        console.log( input.formatToNumber() );
+      }
 
 
-function paymentAmount(el) {
-        el.value = parseFloat(el.value).toFixed(2);
-    };
 </script>
 
 <script>
@@ -300,6 +343,7 @@ function paymentAmount(el) {
     });
 }, 5000);
 </script>
+
 
 </body>
 </html>

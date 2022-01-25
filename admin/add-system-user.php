@@ -2,69 +2,10 @@
 <body>
 
 <div id="wrapper">
-    <?php include 'includes/nav.php' ?>
+<?php include 'includes/nav.php' ?>
 
     <!-- SIDEBAR -->
-
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </li>
-                <li>
-                    <a href="homepage.php" class=""><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> Client Management<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="reservations.php">Reservations</a>
-                        </li>
-                        <li>
-                            <a href="#">Manage<span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level">
-                                <li>
-                                    <a href="view-client.php"><i class="fa fa-eye"></i> View Client</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-user-plus"></i> Add Client</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> Employee Management<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="view-employee.php">View Employee</a>
-                        </li>
-                        <li>
-                            <a href="add-employee.php">Add Employee</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-file-pdf-o fa-fw"></i> Reports<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="reservation-report.php">Reservation</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-    
+<?php include ('includes/sidebar.php') ?>
     <!-- END SIDEBAR -->
     
     <div id="page-wrapper">
@@ -102,7 +43,40 @@
                             System User
                         </div>
                         <div class="panel-body">
-                            
+                        <div class="table-responsive">
+                                <table class="table table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <th>#</th>
+                                        <th>First Name</th>
+                                        <th>Middle Name</th>
+                                        <th>Last Name</th>                                       
+                                        <th>Actions</th>
+                                    </thead>
+                                        <?php
+                                            $select_user = "SELECT * FROM admin WHERE admin_id != '".$user['admin_id']."'";
+                                            $query = $conn->query($select_user);
+                                            $no=1;
+                                            while($row = $query->fetch_assoc()) {                                                           
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $no; ?></td>
+                                                    <td><?php echo $row['admin_firstname']; ?></td>
+                                                    <td><?php echo $row['admin_middlename']; ?></td>
+                                                    <td><?php echo $row['admin_lastname']; ?></td>                                                  
+                                                    <td  class="text-center">
+                                                        <div class="btn-group btn-group-sm"> 
+                                                            <button class="edit-casket btn btn-primary btn-sm" data-id="<?php echo $row['admin_id']; ?>" data-toggle="modal" data-target="#addUser"><i class="fa fa-edit"></i> </button>
+                                                            <button class="delete-casket  btn btn-danger btn-sm" data-id="<?php echo $row['admin_id']; ?>"><i class="fa fa-trash"></i> </button>
+														</div>
+                                                    </td>
+                                                </tr>
+                                             <?php $no++; }
+                                        ?>
+                                    <tbody>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -110,7 +84,7 @@
         </div>
     </div>
 </div>
-
+<?php include 'includes/modals.php' ?>
 <?php include 'includes/scripts.php' ?>
 
 <script>

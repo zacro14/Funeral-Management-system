@@ -208,7 +208,7 @@
                     </dl> 
                     
                 </div>
-                <div class="row mt-5">
+                <div class="row " style ="display: flex; justify-content: center; margin-top: 20px">
                 <div class="col-sm-1">
                     <button type="button" 
                         data-toggle="modal" 

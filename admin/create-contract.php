@@ -15,7 +15,7 @@
     <?php include 'includes/nav.php' ?>
     <!-- SIDEBAR -->
 
-    <div class="navbar-default sidebar" role="navigation">
+    <div class="navbar-default sidebar" role="navigation" style="position: fixed; top: 0px">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="sidebar-search">
@@ -351,8 +351,9 @@
                         </div>
                         <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Chandeliers and Vigil Equip: </label>                 
+                                    <label for="">Amount</label>                 
                                             <input  
+                                                type= "number"
                                                 class="form-control text-capitalize" 
                                                 name="chandeliers-and-vigil-equipment" 
                                                 value="" 
@@ -381,7 +382,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row"><div class="col-lg-12"><h3 class=" text-primary">Amount</h3></div></div>
+                <div class="row"><div class="col-lg-12"><h3 class=" text-primary"> Total Amount: </h3></div></div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="amount" id="amount">

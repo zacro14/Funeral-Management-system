@@ -219,6 +219,7 @@ function fetchData(id){
         dataType: 'json',
         success: function(response){   
             $('.service').html(response.service);
+            $('#servicedetails').val(response.package_include);            
             $('.service-id').val(response.service_id);
             $('#service').val(response.service);
         }

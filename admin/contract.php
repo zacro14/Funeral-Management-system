@@ -164,6 +164,10 @@
 <?php include 'includes/scripts.php' ?>
 
 <script>
+function numberFormat (number) {
+    return  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'PHP' }).format(number);
+}
+
 $(function(){
    
    $('.view').click(function(e)
@@ -195,15 +199,19 @@ function ViewContract(id){
             $('.service').html(response.service);
             $('.casket').html(response.casket_type);
             $('.charges').html(response.other_charges);
-            $('.amount').html(response.amount);
-            $('.payment').html(response.payment_amount);
-            $('.balance').html(response.balance);
+            $('.amount').html(numberFormat(response.amount));
+            $('.casketAmount').html(numberFormat(response.amount));
+            $('.payment').html(numberFormat(response.payment_amount));
+            $('.balance').html(numberFormat(response.balance));
             $('.chapel').html(response.chapel_name);
             $('.address').html(response.address);
             document.getElementById("contract-code").value = response.contract_unique_id;
         }
     });
 }
+
+
+
 </script>
 
 <script>

@@ -39,7 +39,7 @@
                                         <select name="branch" id="" class="form-control" required>
                                             <option value="" selected>-- Select Branch --</option>
                                             <?php
-                                                $branch_query = "SELECT * FROM branches";
+                                                $branch_query = "SELECT * FROM branches where branch_id = 1";
                                                 $query = $conn->query($branch_query);
                                                 while($branch_row = $query->fetch_assoc())
                                                 {

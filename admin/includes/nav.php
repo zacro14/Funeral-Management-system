@@ -12,10 +12,15 @@
         </button>
         <!-- Top Navigation: Right Menu -->
         <ul class="nav navbar-right navbar-top-links">
+            <li class="dropdown navbar-inverse">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-bell pr-3"></i> Casket                
+            </a>             
+            </li>
             <!-- <button class="btn btn-outline btn-primary"><i class="fa fa-plus"></i>ADD SYSTEM USER</button> -->
             <li class="dropdown navbar-inverse">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-plus fa-fw"></i> ADD<b class="caret"></b>
+                    <i class="fa fa-plus-square fa-fw"></i> Add<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-alerts">
                     <li>
@@ -32,7 +37,7 @@
                     <i class="fa fa-user fa-fw"></i> <?php echo $user['admin_firstname'] . ' ' . $user['admin_lastname']; ?> <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    <li><a href="user-details.php"><i class="fa fa-user fa-fw"></i> User Profile</a>
                     </li>
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>

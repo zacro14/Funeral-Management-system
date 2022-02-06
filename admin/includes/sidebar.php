@@ -12,7 +12,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="homepage.php" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="homepage.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-users fa-fw"></i> Client Management<span class="fa arrow"></span></a>
@@ -27,9 +27,9 @@
                                 <li>
                                     <a href="view-client.php"><i class="fa fa-eye"></i> View Client</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="add-client.php"><i class="fa fa-user-plus"></i> Add Client</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                     </ul>

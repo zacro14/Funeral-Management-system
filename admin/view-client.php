@@ -6,7 +6,7 @@
 
     <!-- SIDEBAR -->
 
-    <div class="navbar-default sidebar" role="navigation" style="position: fixed; top: 0px;">
+    <!-- <div class="navbar-default sidebar" role="navigation" style="position: fixed; top: 0px;">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="sidebar-search">
@@ -85,8 +85,9 @@
             </ul>
 
         </div>
-    </div>
+    </div> -->
     
+    <?php include('includes/sidebar.php') ?>
     <!-- END SIDEBAR -->
     
     <div id="page-wrapper">
